@@ -18,6 +18,12 @@ Route::group(['prefix' => 'renstra'], function () {
     Route::get('/detail/{master_id}', [RenstraController::class, 'detail'])->name('renstra.detail');
 });
 
+Route::group(['prefix'=>'edit'], function(){
+    Route::get('/deskripsi/{master_id}', [RenstraController::class, 'desc_edit'])->name('edit.deskripsi');
+    Route::get('/indikator/{master_id}', [RenstraController::class, 'indi_edit'])->name('edit.indikator');
+});
+
+
 // Route To API/V0
 Route::group(['prefix' => 'api/v0'], function () {
     Route::get('/desc', [DescController::class, 'index'])->name('api_v0_desc.index');

@@ -26,6 +26,11 @@ body {
         margin: 0;
     }
 }
+
+textarea {
+    resize: none!important;
+}
+
 .top-3 {
     // border: 0px solid #646464;
     background: linear-gradient(#ddd, #ffffff00);

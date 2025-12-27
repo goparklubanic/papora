@@ -20,4 +20,14 @@ class RenstraController extends Controller
     {
         return view('renstra.detail',compact('master_id'));
     }
+
+    public function desc_edit($master_id)
+    {
+        return view('renstra.desc_edit',compact('master_id'));
+    }
+
+    public function indi_edit($master_ik)
+    {
+        return view('renstra.indi_edit',compact('master_ik'));
+    }
 }
