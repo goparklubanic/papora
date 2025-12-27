@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api\V0;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\Ccd_desc;
+use App\Models\Ccd_indicator;
 use PHPUnit\Metadata\After;
 
 class DescController extends Controller
@@ -236,4 +237,57 @@ class DescController extends Controller
         ]);
     }
 
+    public function getdescription($master_id){
+        $response = Ccd_desc::where('master_id',$master_id)
+            ->select('deskripsi_1', 'deskripsi_2')
+            ->first();
+        if($response->count() > 0){
+            return response()->json($response);
+        }else{
+            return ['deskripsi_1'=>'','deskripsi_2'=>''];
+        }
+    }
+
+    public function setdesctiption(Request $request){
+        $master_id = $request->master_id;
+        $deskripsi_1 = $request->deskripsi_1;
+        $deskripsi_2 = $request->deskripsi_2;
+        $response = Ccd_desc::where('master_id',$master_id)
+            ->update(['deskripsi_1'=>$deskripsi_1, 'deskripsi_2'=>$deskripsi_2]);
+        if($response){
+            return response()->json(['message'=>'success']);
+        }else{
+            return response()->json(['message'=>'failed']);
+        }
+    }
+
+    public function getindikator($master_ik){
+        $indikator = Ccd_indicator::where('master_ik',$master_ik)
+            ->select('indikator', 'satuan', 'baseline', 't1', 't2', 't3', 't4', 't5')
+            ->first();
+        if($indikator->count() > 0){
+            return response()->json($indikator);
+        }else{
+            return ['indikator'=>'','satuan'=>'','baseline'=>'','t1'=>'','t2'=>'','t3'=>'','t4'=>'','t5'=>''];
+        }   
+    }
+
+    public function setindikator(Request $request){
+        $master_ik = $request->master_ik;
+        $indikator = $request->indikator;
+        $satuan = $request->satuan;
+        $baseline = $request->baseline;
+        $t1 = $request->t1;
+        $t2 = $request->t2;
+        $t3 = $request->t3;
+        $t4 = $request->t4;
+        $t5 = $request->t5;
+        $response = Ccd_indicator::where('master_ik',$master_ik)
+            ->update(['indikator'=>$indikator, 'satuan'=>$satuan, 'baseline'=>$baseline, 't1'=>$t1, 't2'=>$t2, 't3'=>$t3, 't4'=>$t4, 't5'=>$t5]);
+        if($response){
+            return response()->json(['message'=>'success']);
+        }else{
+            return response()->json(['message'=>'failed']);
+        }
+    }
 }

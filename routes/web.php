@@ -35,4 +35,9 @@ Route::group(['prefix' => 'api/v0'], function () {
     Route::get('/desc/getSubkegiatan/{master_id}', [DescController::class, 'getSubkegiatan'])->name('api_v0_desc.getSubkegiatan');
     Route::get('/desc/detailcode/{master_id}', [DescController::class, 'detailcode'])->name('api_v0_desc.detailcode');
     Route::get('/desc/detail/{master_id}', [DescController::class, 'detail'])->name('api_v0_desc.detail');
+    // Update description and indicator
+    Route::get('/get/description/{master_id}', [DescController::class, 'getdescription'])->name('api_v0_desc.getdescription');
+    Route::post('/set/description', [DescController::class, 'setdesctiption'])->name('api_v0_desc.setdesctiption');
+    Route::get('/get/indikator/{master_ik}', [DescController::class, 'getindikator'])->name('api_v0_desc.getindikator');
+    Route::post('/set/indikator', [DescController::class, 'setindikator'])->name('api_v0_desc.setindikator');
 });

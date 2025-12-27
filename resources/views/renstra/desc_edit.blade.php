@@ -1,8 +1,13 @@
 @extends('layouts.app')
 @section('content')
+    {{-- alert placeholder triggered by javascript --}}
+    <div id="alert-phd" class="alert alert-success alert-dismissible fade d-none" role="alert">
+        <p id="alert-message"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="row">
         <div class="col-sm-6 mx-auto">
-            <form action="#" method="post">
+            <form action="#" method="post" id="form-desc">
                 @csrf
                 @method('PATCH')
                 <div class="form-group mb-2">
@@ -25,5 +30,16 @@
 @endsection
 
 @section('scriptes')
-    
+    <script>
+        $(function () {
+        fetch(apiurl + "/get/description/{{ $master_id }}")
+            .then((response) => response.json())
+            .then((data) => {
+                // console.log(data);
+                $("#deskripsi_1").val(data.deskripsi_1);
+                $("#deskripsi_2").val(data.deskripsi_2);
+            });
+        });
+    </script>
+    <script src="{{ asset('js/updater.js') }}"></script>
 @endsection

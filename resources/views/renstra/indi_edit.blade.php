@@ -1,9 +1,14 @@
 @extends('layouts.app')
 @section('content')
+    {{-- dismissible flash message --}}
+    <div id="alert-phi" class="alert alert-success alert-dismissible fade d-none" role="alert">
+        <p id="alert-message"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 
      <div class="row">
         <div class="col-sm-6 mx-auto">
-            <form action="#" method="post">
+            <form action="#" method="post" id="form-indi">
                 @csrf
                 @method('PATCH')
                 <div class="form-group mb-2">
@@ -45,7 +50,7 @@
                         <input type="number" name="t5" id="t5" class="form-control">
                     </div>
                 </div>
-
+{{-- 
                 <div class="form-group mb-2">
                     <label for="iku_alasan">IKU Alasan</label>
                     <textarea name="iku_alasan" id="iku_alasan" class="form-control" rows="3"></textarea>
@@ -66,6 +71,7 @@
                     <label for="iku_sumberdata">IKU Sumber Data</label>
                     <textarea name="iku_sumberdata" id="iku_sumberdata" class="form-control" rows="3"></textarea>
                 </div>
+ --}}
                 <div class="form-group mb-2 d-flex justify-content-center">
                     <button type="submit" class="btn btn-dark">Simpan</button>
                 </div>
@@ -75,5 +81,22 @@
 @endsection
 
 @section('scriptes')
-    
+<script>
+$(function () {
+    fetch(apiurl + "/get/indikator/{{ $master_ik }}")
+        .then((response) => response.json())
+        .then((data) => {
+            // console.log(data);
+            $("#indikator").val(data.indikator);
+            $("#satuan").val(data.satuan);
+            $("#baseline").val(data.baseline);
+            $("#t1").val(data.t1);
+            $("#t2").val(data.t2);
+            $("#t3").val(data.t3);
+            $("#t4").val(data.t4);
+            $("#t5").val(data.t5);
+        });
+});
+</script>
+<script src="{{ asset('js/updater.js') }}"></script>
 @endsection
