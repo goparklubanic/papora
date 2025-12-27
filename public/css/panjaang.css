@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Quicksand:wght@300..700&family=Slabo+13px&display=swap");
+body {
+  background: linear-gradient(#d6d6d6, #bac9c4);
+  color: #555555;
+  background-attachment: fixed;
+  font-family: "Dosis", sans-serif;
+}
+
+.logo-box {
+  width: 400px;
+  margin: auto;
+}
+.logo-box img {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.logo-caption {
+  margin-top: -5px;
+  margin-bottom: 100px;
+}
+.logo-caption p {
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+
+.top-3 {
+  background: linear-gradient(#ddd, rgba(255, 255, 255, 0));
+  padding-bottom: 1rem;
+}
+.top-3 h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  background-color: #000f41;
+  color: #fff;
+  padding: 10px;
+}
+.top-3 p {
+  font-size: 1.2rem;
+  text-align: center;
+  font-family: "Dosis", sans-serif;
+}
+
+section.misi,
+section.sasaran,
+section.tujuan-opd,
+section.sasaran-opd {
+  margin-left: 20px;
+}
+section.misi h5,
+section.sasaran h5,
+section.tujuan-opd h5,
+section.sasaran-opd h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+section.misi p,
+section.sasaran p,
+section.tujuan-opd p,
+section.sasaran-opd p {
+  text-align: justify;
+  font-family: "Dosis", sans-serif;
+}
+
+section.misi {
+  padding: 10px;
+  margin-bottom: 20px;
+  font-family: "Dosis", sans-serif;
+}
+
+.nav-link.nav-white,
+.dropdown-item.nav-white {
+  color: #fff;
+}
+
+.table-title {
+  background-color: #003f22;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+table.table-renstra td {
+  padding: 0;
+}
+table.table-renstra section.row {
+  margin: 0;
+}
+table.table-renstra .desc-sasaran {
+  font-size: small;
+  vertical-align: top;
+  background-color: #c8ff88;
+  padding: 0.5rem;
+  padding-top: 0;
+  text-align: right;
+  box-sizing: border-box;
+}
+table.table-renstra .desc-nama {
+  font-size: 1rem;
+  font-family: "Dosis", sans-serif;
+}
+
+.detail-desc {
+  margin-top: 20px;
+  font-family: "Dosis", sans-serif;
+  font-size: 1.2rem;
+  background-color: #2d4e38;
+  color: #fff;
+  padding: 5px 15px;
+}
+.detail-desc p {
+  margin: 0;
+  padding: 0;
+}
+
+table.table-indikator thead tr th {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+table.table-indikator tbody tr {
+  border-bottom: 1px solid #8f8f8f;
+}
+table.table-indikator tbody tr td {
+  font-size: 0.9rem;
+  font-family: "Slabo 13px", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+table.table-indikator tbody tr:nth-child(odd) td {
+  background-color: #d6dafc;
+}
+
+@media screen and (max-width: 450px) {
+  table.table-renstra tbody tr td {
+    display: block;
+  }
+  table.table-renstra tbody tr td:nth-child(2) {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+}/*# sourceMappingURL=panjaang.css.map */
