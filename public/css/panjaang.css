@@ -129,6 +129,10 @@ table.table-indikator thead tr th {
 table.table-indikator tbody tr {
   border-bottom: 1px solid #8f8f8f;
 }
+table.table-indikator tbody tr td:nth-child(1) {
+  width: 50%;
+  max-width: 600px;
+}
 table.table-indikator tbody tr td {
   font-size: 0.9rem;
   font-family: "Slabo 13px", serif;

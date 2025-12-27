@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col">
         <h1>Detail Renstra</h1>
-        <p class='fw-bold'>{{ $master_id }}</p>
+        <p class='fw-bold'>{{ $master_id }} <a href="javascript:void(0)" id="edit-panel" class="text-danger fw-normal text-decoration-none">Edit</a></p>
     </div>
 </div>
 {{-- Detail Sasaran --}}
@@ -20,9 +20,11 @@
                     <tr>
                         <th rowspan="2">Indikator</th>
                         <th rowspan="2">Satuan</th>
-                        <th colspan="5">Target</th>
+                        <th colspan="6">Target</th>
+                        <th rowspan="2">Kontrol</th>
                     </tr>
                     <tr>
+                        <th>Baseline</th>
                         <th>Tahun 1</th>
                         <th>Tahun 2</th>
                         <th>Tahun 3</th>
@@ -32,6 +34,10 @@
                 </thead>
                 <tbody id="ss_indikator"></tbody>
             </table>
+            <div class="edit-bar ss-edit d-flex justify-content-between d-none">
+                <a href="#" class="btn btn-sm btn-dark">Edit Deskripsi</a>
+                <a href="#" class="btn btn-sm btn-dark">Edit Indikator</a>
+            </div>
         </div>
     </div>
 </div>
@@ -49,9 +55,11 @@
                     <tr>
                         <th rowspan="2">Indikator</th>
                         <th rowspan="2">Satuan</th>
-                        <th colspan="5">Target</th>
+                        <th colspan="6">Target</th>
+                        <th rowspan="2">Kontrol</th>
                     </tr>
                     <tr>
+                        <th>Baseline</th>
                         <th>Tahun 1</th>
                         <th>Tahun 2</th>
                         <th>Tahun 3</th>
@@ -78,9 +86,11 @@
                     <tr>
                         <th rowspan="2">Indikator</th>
                         <th rowspan="2">Satuan</th>
-                        <th colspan="5">Target</th>
+                        <th colspan="6">Target</th>
+                        <th rowspan="2">Kontrol</th>
                     </tr>
                     <tr>
+                        <th>Baseline</th>
                         <th>Tahun 1</th>
                         <th>Tahun 2</th>
                         <th>Tahun 3</th>
@@ -107,9 +117,11 @@
                     <tr>
                         <th rowspan="2">Indikator</th>
                         <th rowspan="2">Satuan</th>
-                        <th colspan="5">Target</th>
+                        <th colspan="6">Target</th>
+                        <th rowspan="2">Kontrol</th>
                     </tr>
                     <tr>
+                        <th>Baseline</th>
                         <th>Tahun 1</th>
                         <th>Tahun 2</th>
                         <th>Tahun 3</th>
