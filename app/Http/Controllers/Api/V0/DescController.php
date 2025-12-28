@@ -293,13 +293,17 @@ class DescController extends Controller
 
     // View All Information
     public function getallindikator($master_ik){
+        $master_id = substr($master_ik,0,14);
         $indikator = Ccd_indicator::where('master_ik',$master_ik)
             ->select('indikator', 'satuan', 'baseline', 't1', 't2', 't3', 't4', 't5', 'iku_alasan', 'iku_formulasi', 'iku_tipehitung', 'iku_do', 'iku_sumberdata')
             ->first();
+        $deskripsi = Ccd_desc::where('master_id',$master_id)
+            ->select('tahun','deskripsi_1', 'deskripsi_2')
+            ->first();
         if($indikator->count() > 0){
-            return response()->json($indikator);
+            return response()->json(['des'=>$deskripsi,'ind'=>$indikator]);
         }else{
-            return ['indikator'=>'','satuan'=>'','baseline'=>'','t1'=>'','t2'=>'','t3'=>'','t4'=>'','t5'=>'','iku_alasan'=>'','iku_formulasi'=>'','iku_tipehitung'=>'','iku_do'=>'','iku_sumberdata'=>''];
+            return ['des'=>['deskripsi_1'=>'','deskripsi_2'=>''],'ind'=>['indikator'=>'','satuan'=>'','baseline'=>'','t1'=>'','t2'=>'','t3'=>'','t4'=>'','t5'=>'','iku_alasan'=>'','iku_formulasi'=>'','iku_tipehitung'=>'','iku_do'=>'','iku_sumberdata'=>'']];
         }
     }   
 }
