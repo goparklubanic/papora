@@ -30,6 +30,23 @@ textarea {
   resize: none !important;
 }
 
+.col-title {
+  background-color: #002658;
+  color: #e4ffb1;
+  border-top: 1px solid #fff;
+  padding-top: 1.5rem;
+  font-family: dosis;
+}
+.col-title h2 {
+  margin: 0 !important;
+}
+.col-title p {
+  font-family: slabo;
+}
+.col-title p a {
+  margin-left: 10px;
+}
+
 .top-3 {
   background: linear-gradient(#ddd, rgba(255, 255, 255, 0));
   padding-bottom: 1rem;

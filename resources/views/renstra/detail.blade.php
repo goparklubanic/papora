@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-    <div class="col">
-        <h1>Detail Renstra</h1>
-        <p class='fw-bold'>{{ $master_id }} <a href="javascript:void(0)" id="edit-panel" class="text-danger fw-normal text-decoration-none">Edit</a></p>
+    <div class="col col-title">
+        <h2>Detail Renstra</h2>
+        <p class='fw-bold'>{{ $master_id }} <a href="javascript:void(0)" id="edit-panel" class="text-warning fw-normal text-decoration-none">Edit</a></p>
     </div>
 </div>
 {{-- Detail Sasaran --}}

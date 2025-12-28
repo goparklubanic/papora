@@ -1,5 +1,11 @@
 @extends('layouts.app')
 @section('content')
+<div class="row">
+    <div class="col col-title">
+        <h2>Update Indikator</h2>
+        <p class='fw-bold'>{{ $master_ik }}</p>
+    </div>
+</div>
     {{-- dismissible flash message --}}
     <div id="alert-phi" class="alert alert-success alert-dismissible fade d-none" role="alert">
         <p id="alert-message"></p>

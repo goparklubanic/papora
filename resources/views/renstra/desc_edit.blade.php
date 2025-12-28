@@ -1,5 +1,11 @@
 @extends('layouts.app')
 @section('content')
+    <div class="row">
+    <div class="col col-title">
+        <h2>Update Deskripsi</h2>
+        <p class='fw-bold'>{{ $master_id }}</p>
+    </div>
+</div>
     {{-- alert placeholder triggered by javascript --}}
     <div id="alert-phd" class="alert alert-success alert-dismissible fade d-none" role="alert">
         <p id="alert-message"></p>
