@@ -16,6 +16,7 @@ Route::group(['prefix' => 'renstra'], function () {
     Route::get('/', [RenstraController::class, 'index'])->name('renstra.index');
     Route::get('/jelajah', [RenstraController::class, 'jelajah'])->name('renstra.jelajah');
     Route::get('/detail/{master_id}', [RenstraController::class, 'detail'])->name('renstra.detail');
+    Route::get('/view/{master_ik}', [RenstraController::class, 'indi_view'])->name('edit.view');
 });
 
 Route::group(['prefix'=>'edit'], function(){
@@ -40,4 +41,5 @@ Route::group(['prefix' => 'api/v0'], function () {
     Route::post('/set/description', [DescController::class, 'setdesctiption'])->name('api_v0_desc.setdesctiption');
     Route::get('/get/indikator/{master_ik}', [DescController::class, 'getindikator'])->name('api_v0_desc.getindikator');
     Route::post('/set/indikator', [DescController::class, 'setindikator'])->name('api_v0_desc.setindikator');
+    Route::get('/view/{master_ik}', [DescController::class, 'getallindikator'])->name('api_v0_desc.getallindikator');
 });

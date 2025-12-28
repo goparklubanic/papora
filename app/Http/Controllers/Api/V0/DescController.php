@@ -290,4 +290,16 @@ class DescController extends Controller
             return response()->json(['message'=>'failed']);
         }
     }
+
+    // View All Information
+    public function getallindikator($master_ik){
+        $indikator = Ccd_indicator::where('master_ik',$master_ik)
+            ->select('indikator', 'satuan', 'baseline', 't1', 't2', 't3', 't4', 't5', 'iku_alasan', 'iku_formulasi', 'iku_tipehitung', 'iku_do', 'iku_sumberdata')
+            ->first();
+        if($indikator->count() > 0){
+            return response()->json($indikator);
+        }else{
+            return ['indikator'=>'','satuan'=>'','baseline'=>'','t1'=>'','t2'=>'','t3'=>'','t4'=>'','t5'=>'','iku_alasan'=>'','iku_formulasi'=>'','iku_tipehitung'=>'','iku_do'=>'','iku_sumberdata'=>''];
+        }
+    }   
 }

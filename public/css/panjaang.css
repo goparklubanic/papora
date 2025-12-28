@@ -160,6 +160,15 @@ table.table-indikator tbody tr:nth-child(odd) td {
   background-color: #d6dafc;
 }
 
+.td-nav {
+  text-align: center;
+  background-color: #dbdbdb;
+}
+.td-nav i {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+
 @media screen and (max-width: 450px) {
   table.table-renstra tbody tr td {
     display: block;

@@ -32,9 +32,9 @@
             </ul>
             <form class="d-flex" action="#" method="POST">
                 @csrf
-                <input class="form-control me-2" type="email" name="email" placeholder="Email" aria-label="Email" required>
-                <input class="form-control me-2" type="password" name="password" placeholder="Password" aria-label="Password" required>
-                <button class="btn btn-outline-primary" type="submit">Login</button>
+                <input class="form-control form-control-sm me-2" type="email" name="email" placeholder="Email" aria-label="Email" required>
+                <input class="form-control form-control-sm me-2" type="password" name="password" placeholder="Password" aria-label="Password" required>
+                <button class="btn btn-sm btn-primary btn-outline-white" type="submit">Login</button>
             </form>
         </div>
     </div>
