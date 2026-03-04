@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('ccd_budgets', function (Blueprint $table) {
             $table->uuid('budget_hash')->primary();
-            $table->string('master_ik')->constrained('ccd_indicators');
-            $table->float('t1', 10, 2)->nullable();
-            $table->float('t2', 10, 2)->nullable();
-            $table->float('t3', 10, 2)->nullable();
-            $table->float('t4', 10, 2)->nullable();
-            $table->float('t5', 10, 2)->nullable();
+            $table->foreignId('master_ik')->constrained('ccd_indicators');
+            $table->decimal('t1', 10, 2)->nullable();
+            $table->decimal('t2', 10, 2)->nullable();
+            $table->decimal('t3', 10, 2)->nullable();
+            $table->decimal('t4', 10, 2)->nullable();
+            $table->decimal('t5', 10, 2)->nullable();
             $table->timestamps();
         });
     }

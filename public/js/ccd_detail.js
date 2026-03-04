@@ -32,7 +32,7 @@ $(function () {
                         <td class='text-end'>${ind.t5}</td>
                         <td class='text-center td-nav'>
                             ${editi}&nbsp;
-                            <a href="${weburl}/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
+                            <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
                         </td>
                     </tr>
                 `);
@@ -65,7 +65,7 @@ $(function () {
                         <td class='text-end'>${ind.t5}</td>
                         <td class='text-center td-nav'>
                             ${editi}&nbsp;
-                            <a href="${weburl}/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
+                            <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
                         </td>
                     </tr>
                 `);
@@ -98,7 +98,7 @@ $(function () {
                         <td class='text-end'>${ind.t5}</td>
                         <td class='text-center td-nav'>
                             ${editi}&nbsp;
-                            <a href="${weburl}/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
+                            <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
                         </td>
                     </tr>
                 `);
@@ -131,7 +131,7 @@ $(function () {
                         <td class='text-end'>${ind.t5}</td>
                         <td class='text-center td-nav'>
                             ${editi}
-                            <a href="${weburl}/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
+                            <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
                         </td>
                     </tr>
                 `);

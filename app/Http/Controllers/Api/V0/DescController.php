@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ccd_desc;
 use App\Models\Ccd_indicator;
-use PHPUnit\Metadata\After;
+use App\Models\Ccd_budget;
+// use PHPUnit\Metadata\After;
 
 class DescController extends Controller
 {
@@ -305,5 +306,17 @@ class DescController extends Controller
         }else{
             return ['des'=>['deskripsi_1'=>'','deskripsi_2'=>''],'ind'=>['indikator'=>'','satuan'=>'','baseline'=>'','t1'=>'','t2'=>'','t3'=>'','t4'=>'','t5'=>'','iku_alasan'=>'','iku_formulasi'=>'','iku_tipehitung'=>'','iku_do'=>'','iku_sumberdata'=>'']];
         }
-    }   
+    }
+    
+    // get budget
+    public function getbudget($master_ik){
+        $budget = Ccd_budget::where('master_ik',$master_ik)
+            ->select('t1', 't2', 't3', 't4', 't5')
+            ->first();
+        if($budget->count() > 0){
+            return response()->json($budget);
+        }else{
+            return ['t1'=>0,'t2'=>0,'t3'=>0,'t4'=>0,'t5'=>0];
+        }
+    }
 }

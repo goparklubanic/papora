@@ -37,6 +37,13 @@ class RenstraController extends Controller
         // echo $topic;
         return view('renstra.indi_view',compact('master_ik','topic'));
     }
+
+    public function indi_print($master_ik)
+    {
+        $topic = $this->eval_ik($master_ik);
+        // echo $topic;
+        return view('renstra.indi_print',compact('master_ik','topic'));
+    }
     
     private function eval_ik($master_ik){
         list($tj_id,$ss_id,$pg_id,$kg_id,$sk_id,$ik_id) = explode("-",$master_ik);

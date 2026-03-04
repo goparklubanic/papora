@@ -141,6 +141,9 @@ table.table-renstra {
     }
 }
 
+.ff-dosis {
+    font-family: "Dosis", sans-serif;
+}
 // Table indikator
 table.table-indikator {
     thead tr th {
@@ -176,6 +179,13 @@ table.table-indikator {
     }
 }
 
+.monospace {
+    font-family: monospace;
+}
+
+.fsz-6{
+    font-size: 0.8rem!important;
+}
 @media screen and (max-width: 450px) {
     table.table-renstra tbody tr td {
         display: block;

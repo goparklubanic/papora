@@ -138,6 +138,10 @@ table.table-renstra .desc-nama {
   padding: 0;
 }
 
+.ff-dosis {
+  font-family: "Dosis", sans-serif;
+}
+
 table.table-indikator thead tr th {
   font-size: 1rem;
   font-weight: bold;
@@ -167,6 +171,14 @@ table.table-indikator tbody tr:nth-child(odd) td {
 .td-nav i {
   font-size: 1.2rem;
   margin-right: 5px;
+}
+
+.monospace {
+  font-family: monospace;
+}
+
+.fsz-6 {
+  font-size: 0.8rem !important;
 }
 
 @media screen and (max-width: 450px) {
