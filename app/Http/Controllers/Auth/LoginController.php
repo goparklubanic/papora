@@ -29,7 +29,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             // 4. Redirect ke index (sesuai permintaan)
-            return redirect()->intended('/');
+            return redirect()->intended('/renstra/jelajah');
         }
 
         // 5. Jika gagal, kembali ke login dengan error
