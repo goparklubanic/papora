@@ -3,27 +3,37 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RenstraController;
 use App\Http\Controllers\Api\V0\DescController;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
     return view('dashboard');
 });
 
+
 Route::get('/idgenerator', function () {
     return view('generator_id');
 });
 
-Route::group(['prefix' => 'renstra'], function () {
-    Route::get('/', [RenstraController::class, 'index'])->name('renstra.index');
-    Route::get('/jelajah', [RenstraController::class, 'jelajah'])->name('renstra.jelajah');
-    Route::get('/detail/{master_id}', [RenstraController::class, 'detail'])->name('renstra.detail');
-    Route::get('/view/{master_ik}', [RenstraController::class, 'indi_view'])->name('renstra.view');
-    Route::get('/print/{master_ik}', [RenstraController::class, 'indi_print'])->name('renstra.print');
+Route::middleware(['auth'])->group(function () {
+
+    Route::group(['prefix' => 'renstra'], function () {
+        Route::get('/', [RenstraController::class, 'index'])->name('renstra.index');
+        Route::get('/jelajah', [RenstraController::class, 'jelajah'])->name('renstra.jelajah');
+        Route::get('/detail/{master_id}', [RenstraController::class, 'detail'])->name('renstra.detail');
+        Route::get('/view/{master_ik}', [RenstraController::class, 'indi_view'])->name('renstra.view');
+        Route::get('/print/{master_ik}', [RenstraController::class, 'indi_print'])->name('renstra.print');
+    });
+
+    Route::group(['prefix'=>'edit'], function(){
+        Route::get('/deskripsi/{master_id}', [RenstraController::class, 'desc_edit'])->name('edit.deskripsi');
+        Route::get('/indikator/{master_id}', [RenstraController::class, 'indi_edit'])->name('edit.indikator');
+    });
+
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
 });
 
-Route::group(['prefix'=>'edit'], function(){
-    Route::get('/deskripsi/{master_id}', [RenstraController::class, 'desc_edit'])->name('edit.deskripsi');
-    Route::get('/indikator/{master_id}', [RenstraController::class, 'indi_edit'])->name('edit.indikator');
-});
+
 
 
 // Route To API/V0
