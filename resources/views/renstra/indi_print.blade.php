@@ -95,12 +95,36 @@
                         <td id="vt5"></td>
                     </tr>
                     <tr class="text-center">
-                        <td class="fw-bold text-start">Capaian</td>
-                        <td id="cvt1"></td>
-                        <td id="cvt2"></td>
-                        <td id="cvt3"></td>
-                        <td id="cvt4"></td>
-                        <td id="cvt5"></td>
+                        <td class="fw-bold text-start">Capaian TW1</td>
+                        <td id="cvt1_tw1"></td>
+                        <td id="cvt2_tw1"></td>
+                        <td id="cvt3_tw1"></td>
+                        <td id="cvt4_tw1"></td>
+                        <td id="cvt5_tw1"></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="fw-bold text-start">Capaian TW2</td>
+                        <td id="cvt1_tw2"></td>
+                        <td id="cvt2_tw2"></td>
+                        <td id="cvt3_tw2"></td>
+                        <td id="cvt4_tw2"></td>
+                        <td id="cvt5_tw2"></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="fw-bold text-start">Capaian TW3</td>
+                        <td id="cvt1_tw3"></td>
+                        <td id="cvt2_tw3"></td>
+                        <td id="cvt3_tw3"></td>
+                        <td id="cvt4_tw3"></td>
+                        <td id="cvt5_tw3"></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="fw-bold text-start">Capaian TW4</td>
+                        <td id="cvt1_tw4"></td>
+                        <td id="cvt2_tw4"></td>
+                        <td id="cvt3_tw4"></td>
+                        <td id="cvt4_tw4"></td>
+                        <td id="cvt5_tw4"></td>
                     </tr>
                 </tbody>
             </table>
@@ -206,11 +230,26 @@
             $("#vt3").text(data.ind.t3);
             $("#vt4").text(data.ind.t4);
             $("#vt5").text(data.ind.t5);
-            $("#cvt1").text(data.ind.ct1);
-            $("#cvt2").text(data.ind.ct2);
-            $("#cvt3").text(data.ind.ct3);
-            $("#cvt4").text(data.ind.ct4);
-            $("#cvt5").text(data.ind.ct5);
+            $("#cvt1_tw1").text(data.ind.ct1_tw1);
+            $("#cvt2_tw1").text(data.ind.ct2_tw1);
+            $("#cvt3_tw1").text(data.ind.ct3_tw1);
+            $("#cvt4_tw1").text(data.ind.ct4_tw1);
+            $("#cvt5_tw1").text(data.ind.ct5_tw1);
+            $("#cvt1_tw2").text(data.ind.ct1_tw2);
+            $("#cvt2_tw2").text(data.ind.ct2_tw2);
+            $("#cvt3_tw2").text(data.ind.ct3_tw2);
+            $("#cvt4_tw2").text(data.ind.ct4_tw2);
+            $("#cvt5_tw2").text(data.ind.ct5_tw2);
+            $("#cvt1_tw3").text(data.ind.ct1_tw3);
+            $("#cvt2_tw3").text(data.ind.ct2_tw3);
+            $("#cvt3_tw3").text(data.ind.ct3_tw3);
+            $("#cvt4_tw3").text(data.ind.ct4_tw3);
+            $("#cvt5_tw3").text(data.ind.ct5_tw3);
+            $("#cvt1_tw4").text(data.ind.ct1_tw4);
+            $("#cvt2_tw4").text(data.ind.ct2_tw4);
+            $("#cvt3_tw4").text(data.ind.ct3_tw4);
+            $("#cvt4_tw4").text(data.ind.ct4_tw4);
+            $("#cvt5_tw4").text(data.ind.ct5_tw4);
             $("#iku_alasan").text(data.ind.iku_alasan);
             $("#iku_formulasi").text(data.ind.iku_formulasi);
             $("#iku_tipehitung").text(data.ind.iku_tipehitung);

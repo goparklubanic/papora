@@ -20,12 +20,27 @@ return new class extends Migration
             $table->decimal('t3', 10, 2)->nullable();
             $table->decimal('t4', 10, 2)->nullable();
             $table->decimal('t5', 10, 2)->nullable();
+            $table->decimal('ct1_tw1', 10, 2)->default(0.00);
+            $table->decimal('ct1_tw2', 10, 2)->default(0.00);
+            $table->decimal('ct1_tw3', 10, 2)->default(0.00);
+            $table->decimal('ct1_tw4', 10, 2)->default(0.00);
+            $table->decimal('ct2_tw1', 10, 2)->default(0.00);
+            $table->decimal('ct2_tw2', 10, 2)->default(0.00);
+            $table->decimal('ct2_tw3', 10, 2)->default(0.00);
+            $table->decimal('ct2_tw4', 10, 2)->default(0.00);
+            $table->decimal('ct3_tw1', 10, 2)->default(0.00);
+            $table->decimal('ct3_tw2', 10, 2)->default(0.00);
+            $table->decimal('ct3_tw3', 10, 2)->default(0.00);
+            $table->decimal('ct3_tw4', 10, 2)->default(0.00);
+            $table->decimal('ct4_tw1', 10, 2)->default(0.00);
+            $table->decimal('ct4_tw2', 10, 2)->default(0.00);
+            $table->decimal('ct4_tw3', 10, 2)->default(0.00);
+            $table->decimal('ct4_tw4', 10, 2)->default(0.00);
+            $table->decimal('ct5_tw1', 10, 2)->default(0.00);
+            $table->decimal('ct5_tw2', 10, 2)->default(0.00);
+            $table->decimal('ct5_tw3', 10, 2)->default(0.00);
+            $table->decimal('ct5_tw4', 10, 2)->default(0.00);
             $table->timestamps();
-            $table->decimal('ct1', 10, 2)->default(0.00);
-            $table->decimal('ct2', 10, 2)->default(0.00);
-            $table->decimal('ct3', 10, 2)->default(0.00);
-            $table->decimal('ct4', 10, 2)->default(0.00);
-            $table->decimal('ct5', 10, 2)->default(0.00);
         });
     }
 

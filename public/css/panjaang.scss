@@ -188,9 +188,17 @@ table.table-indikator {
 }
 
 .tbr-first-col{
-    width: 150px;
+    width: 150px!important;
 }
 
+.tbi-first-col{
+    width: 100px!important;
+}
+
+table.bg-trans{
+    thead>tr>th {background: transparent!important;}
+    tbody>tr>td {background: transparent!important;}
+}
 @media screen and (max-width: 450px) {
     table.table-renstra tbody tr td {
         display: block;

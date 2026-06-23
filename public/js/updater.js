@@ -30,56 +30,13 @@ $("#form-desc").on("submit", function (e) {
 
 $("#form-indi").on("submit", function (e) {
     e.preventDefault();
-    let master_ik = $("#master_ik").val();
-    let indikator = $("#indikator").val();
-    let satuan = $("#satuan").val();
-    let baseline = $("#baseline").val();
-    let t1 = $("#t1").val();
-    let t2 = $("#t2").val();
-    let t3 = $("#t3").val();
-    let t4 = $("#t4").val();
-    let t5 = $("#t5").val();
-    let ct1 = $("#ct1").val();
-    let ct2 = $("#ct2").val();
-    let ct3 = $("#ct3").val();
-    let ct4 = $("#ct4").val();
-    let ct5 = $("#ct5").val();
-    let vat1 = $("#vat1").val();
-    let vat2 = $("#vat2").val();
-    let vat3 = $("#vat3").val();
-    let vat4 = $("#vat4").val();
-    let vat5 = $("#vat5").val();
-    let cat1 = $("#cat1").val();
-    let cat2 = $("#cat2").val();
-    let cat3 = $("#cat3").val();
-    let cat4 = $("#cat4").val();
-    let cat5 = $("#cat5").val();
-    let data = {
-        master_ik: master_ik,
-        indikator: indikator,
-        satuan: satuan,
-        baseline: baseline,
-        t1: t1,
-        t2: t2,
-        t3: t3,
-        t4: t4,
-        t5: t5,
-        ct1:ct1,
-        ct2:ct2,
-        ct3:ct3,
-        ct4:ct4,
-        ct5:ct5,
-        vat1:vat1,
-        vat2:vat2,
-        vat3:vat3,
-        vat4:vat4,
-        vat5:vat5,
-        cat1:cat1,
-        cat2:cat2,
-        cat3:cat3,
-        cat4:cat4,
-        cat5:cat5
-    };
+    let data = {};
+    $("#form-indi :input").each(function () {
+        let name = $(this).attr("name");
+        if (name) {
+            data[name] = $(this).val();
+        }
+    });
     let message = "";
     postData(apiurl + "/set/indikator", data)
     .then((response) => {

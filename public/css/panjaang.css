@@ -182,7 +182,18 @@ table.table-indikator tbody tr:nth-child(odd) td {
 }
 
 .tbr-first-col {
-  width: 150px;
+  width: 150px !important;
+}
+
+.tbi-first-col {
+  width: 100px !important;
+}
+
+table.bg-trans thead > tr > th {
+  background: transparent !important;
+}
+table.bg-trans tbody > tr > td {
+  background: transparent !important;
 }
 
 @media screen and (max-width: 450px) {
