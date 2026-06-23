@@ -30,6 +30,11 @@ return new class extends Migration
             $table->text('iku_sumberdata')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at');
+            $table->float('ct1', 8, 2)->default('0.00');
+            $table->float('ct2', 8, 2)->default('0.00');
+            $table->float('ct3', 8, 2)->default('0.00');
+            $table->float('ct4', 8, 2)->default('0.00');
+            $table->float('ct5', 8, 2)->default('0.00');
         });
     }
 

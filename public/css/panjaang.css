@@ -181,6 +181,10 @@ table.table-indikator tbody tr:nth-child(odd) td {
   font-size: 0.8rem !important;
 }
 
+.tbr-first-col {
+  width: 150px;
+}
+
 @media screen and (max-width: 450px) {
   table.table-renstra tbody tr td {
     display: block;

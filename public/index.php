@@ -1,6 +1,6 @@
 <?php
-header("Location: https://panjaang.nugrahamedia.biz.id");
-die();
+# header("Location: https://panjaang.nugrahamedia.biz.id");
+# die();
 use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));

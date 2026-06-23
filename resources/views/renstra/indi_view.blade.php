@@ -42,6 +42,7 @@
             <table class="table table-striped table-sm mt-2">
                 <thead>
                     <tr class="text-center">
+                        <th class="text-start fw-bold tbr-first-col">Tahun</th>
                         <th id="t1"></th>
                         <th id="t2"></th>
                         <th id="t3"></th>
@@ -51,11 +52,20 @@
                 </thead>
                 <tbody>
                     <tr class="text-center">
+                        <td class="fw-bold text-start">Rencana</td>
                         <td id="vt1"></td>
                         <td id="vt2"></td>
                         <td id="vt3"></td>
                         <td id="vt4"></td>
                         <td id="vt5"></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="fw-bold text-start">Capaian</td>
+                        <td id="cvt1"></td>
+                        <td id="cvt2"></td>
+                        <td id="cvt3"></td>
+                        <td id="cvt4"></td>
+                        <td id="cvt5"></td>
                     </tr>
                 </tbody>
             </table>
@@ -66,6 +76,7 @@
             <table class="table table-striped table-sm mt-2">
                 <thead>
                     <tr class="text-center">
+                        <th class="text-start fw-bold tbr-first-col">Tahun</th>
                         <th id="at1"></th>
                         <th id="at2"></th>
                         <th id="at3"></th>
@@ -75,11 +86,20 @@
                 </thead>
                 <tbody>
                     <tr class="text-center">
+                        <td class="fw-bold text-start">Rencana</td>
                         <td class="text-end monospace fsz-6" id="vat1"></td>
                         <td class="text-end monospace fsz-6" id="vat2"></td>
                         <td class="text-end monospace fsz-6" id="vat3"></td>
                         <td class="text-end monospace fsz-6" id="vat4"></td>
                         <td class="text-end monospace fsz-6" id="vat5"></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="fw-bold text-start">Capaian</td>
+                        <td class="text-end monospace fsz-6" id="cat1"></td>
+                        <td class="text-end monospace fsz-6" id="cat2"></td>
+                        <td class="text-end monospace fsz-6" id="cat3"></td>
+                        <td class="text-end monospace fsz-6" id="cat4"></td>
+                        <td class="text-end monospace fsz-6" id="cat5"></td>
                     </tr>
                 </tbody>
             </table>
@@ -151,6 +171,11 @@
             $("#vt3").text(data.ind.t3);
             $("#vt4").text(data.ind.t4);
             $("#vt5").text(data.ind.t5);
+            $("#cvt1").text(data.ind.ct1);
+            $("#cvt2").text(data.ind.ct2);
+            $("#cvt3").text(data.ind.ct3);
+            $("#cvt4").text(data.ind.ct4);
+            $("#cvt5").text(data.ind.ct5);
             $("#iku_alasan").text(data.ind.iku_alasan);
             $("#iku_formulasi").text(data.ind.iku_formulasi);
             $("#iku_tipehitung").text(data.ind.iku_tipehitung);
@@ -172,6 +197,11 @@
             $("#vat3").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.t3));
             $("#vat4").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.t4));
             $("#vat5").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.t5));
+            $("#cat1").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct1));
+            $("#cat2").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct2));
+            $("#cat3").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct3));
+            $("#cat4").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct4));
+            $("#cat5").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct5));
         });
     }
 

@@ -56,6 +56,7 @@ Route::group(['prefix' => 'api/v0'], function () {
     Route::get('/get/description/{master_id}', [DescController::class, 'getdescription'])->name('api_v0_desc.getdescription');
     Route::post('/set/description', [DescController::class, 'setdesctiption'])->name('api_v0_desc.setdesctiption');
     Route::get('/get/indikator/{master_ik}', [DescController::class, 'getindikator'])->name('api_v0_desc.getindikator');
+    Route::get('/get/indikaget/{master_ika}',[DescController::class, 'getIndikatorDanBudget'])->name('api_v0_desc.getindikaget');
     Route::post('/set/indikator', [DescController::class, 'setindikator'])->name('api_v0_desc.setindikator');
     Route::get('/view/{master_ik}', [DescController::class, 'getallindikator'])->name('api_v0_desc.getallindikator');
     Route::get('/budget/{master_ik}', [DescController::class, 'getbudget'])->name('api_v0_desc.getbudget');

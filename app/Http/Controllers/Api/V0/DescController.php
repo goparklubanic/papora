@@ -263,11 +263,14 @@ class DescController extends Controller
     }
 
     public function getindikator($master_ik){
+        // $mybudget = $this->getbudget($master_ik);
         $indikator = Ccd_indicator::where('master_ik',$master_ik)
-            ->select('indikator', 'satuan', 'baseline', 't1', 't2', 't3', 't4', 't5')
+            ->select('indikator', 'satuan', 'baseline', 't1', 't2', 't3', 't4', 't5','ct1','ct2','ct3','ct4','ct5')
             ->first();
         if($indikator->count() > 0){
+            // $responses = ['indikator'=>$indikator,'budget'=>$mybudget];
             return response()->json($indikator);
+            // return response()->json($responses);
         }else{
             return ['indikator'=>'','satuan'=>'','baseline'=>'','t1'=>'','t2'=>'','t3'=>'','t4'=>'','t5'=>''];
         }   
@@ -283,10 +286,32 @@ class DescController extends Controller
         $t3 = $request->t3;
         $t4 = $request->t4;
         $t5 = $request->t5;
+        $ct1 = $request->ct1;
+        $ct2 = $request->ct2;
+        $ct3 = $request->ct3;
+        $ct4 = $request->ct4;
+        $ct5 = $request->ct5;
+        // data anggaran
+        $vat1 = $request->vat1;
+        $vat2 = $request->vat2;
+        $vat3 = $request->vat3;
+        $vat4 = $request->vat4;
+        $vat5 = $request->vat5;
+        $cat1 = $request->cat1;
+        $cat2 = $request->cat2;
+        $cat3 = $request->cat3;
+        $cat4 = $request->cat4;
+        $cat5 = $request->cat5;
         $response = Ccd_indicator::where('master_ik',$master_ik)
-            ->update(['indikator'=>$indikator, 'satuan'=>$satuan, 'baseline'=>$baseline, 't1'=>$t1, 't2'=>$t2, 't3'=>$t3, 't4'=>$t4, 't5'=>$t5]);
+            ->update(['indikator'=>$indikator, 'satuan'=>$satuan, 'baseline'=>$baseline, 't1'=>$t1, 't2'=>$t2, 't3'=>$t3, 't4'=>$t4, 't5'=>$t5,'ct1'=>$ct1, 'ct2'=>$ct2, 'ct3'=>$ct3, 'ct4'=>$ct4, 'ct5'=>$ct5]);
+        
         if($response){
-            return response()->json(['message'=>'success']);
+            $setbudget = $this->setbudget($master_ik,$vat1,$vat2,$vat3,$vat4,$vat5,$cat1,$cat2,$cat3,$cat4,$cat5);
+            if($setbudget){
+                return response()->json(['message'=>'success']);
+            }else{
+                return response()->json(['message'=>'budget failed']);
+            }
         }else{
             return response()->json(['message'=>'failed']);
         }
@@ -296,7 +321,7 @@ class DescController extends Controller
     public function getallindikator($master_ik){
         $master_id = substr($master_ik,0,14);
         $indikator = Ccd_indicator::where('master_ik',$master_ik)
-            ->select('indikator', 'satuan', 'baseline', 't1', 't2', 't3', 't4', 't5', 'iku_alasan', 'iku_formulasi', 'iku_tipehitung', 'iku_do', 'iku_sumberdata')
+            ->select('indikator', 'satuan', 'baseline', 't1', 't2', 't3', 't4', 't5','ct1','ct2','ct3','ct4','ct5', 'iku_alasan', 'iku_formulasi', 'iku_tipehitung', 'iku_do', 'iku_sumberdata')
             ->first();
         $deskripsi = Ccd_desc::where('master_id',$master_id)
             ->select('tahun','deskripsi_1', 'deskripsi_2')
@@ -307,11 +332,35 @@ class DescController extends Controller
             return ['des'=>['deskripsi_1'=>'','deskripsi_2'=>''],'ind'=>['indikator'=>'','satuan'=>'','baseline'=>'','t1'=>'','t2'=>'','t3'=>'','t4'=>'','t5'=>'','iku_alasan'=>'','iku_formulasi'=>'','iku_tipehitung'=>'','iku_do'=>'','iku_sumberdata'=>'']];
         }
     }
+
+    // set budget
+    public function setbudget($ik,$t1,$t2,$t3,$t4,$t5,$ct1,$ct2,$ct3,$ct4,$ct5){
+        $budget = Ccd_budget::where('master_ik',$ik)->first();
+        if($budget){
+            $response = $budget->update([
+                't1'=>$t1,'t2'=>$t2,'t3'=>$t3,'t4'=>$t4,'t5'=>$t5,
+                'ct1'=>$ct1,'ct2'=>$ct2,'ct3'=>$ct3,'ct4'=>$ct4,'ct5'=>$ct5
+            ]);
+        }else{
+            $response = Ccd_budget::create([
+                'budget_hash' => (string) \Illuminate\Support\Str::uuid(),
+                'master_ik' => $ik,
+                't1'=>$t1,'t2'=>$t2,'t3'=>$t3,'t4'=>$t4,'t5'=>$t5,
+                'ct1'=>$ct1,'ct2'=>$ct2,'ct3'=>$ct3,'ct4'=>$ct4,'ct5'=>$ct5,
+            ]);
+        }
+        if($response){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     
     // get budget
     public function getbudget($master_ik){
         $budget = Ccd_budget::where('master_ik',$master_ik)
-            ->select('t1', 't2', 't3', 't4', 't5')
+            ->select('t1', 't2', 't3', 't4', 't5','ct1','ct2','ct3','ct4','ct5')
             ->first();
         if($budget->count() > 0){
             return response()->json($budget);
@@ -319,4 +368,32 @@ class DescController extends Controller
             return ['t1'=>0,'t2'=>0,'t3'=>0,'t4'=>0,'t5'=>0];
         }
     }
+
+    // get indikator dan budget
+    public function getIndikatorDanBudget($master_ik)
+{
+    // Ambil data indikator
+    $indikator = Ccd_indicator::where('master_ik', $master_ik)
+        ->select('indikator', 'satuan', 'baseline', 't1', 't2', 't3', 't4', 't5', 'ct1', 'ct2', 'ct3', 'ct4', 'ct5')
+        ->first();
+
+    $indikatorData = $indikator
+        ? $indikator->toArray()
+        : ['indikator' => '', 'satuan' => '', 'baseline' => '', 't1' => '', 't2' => '', 't3' => '', 't4' => '', 't5' => ''];
+
+    // Ambil data budget
+    $budget = Ccd_budget::where('master_ik', $master_ik)
+        ->select('t1', 't2', 't3', 't4', 't5', 'ct1', 'ct2', 'ct3', 'ct4', 'ct5')
+        ->first();
+
+    $budgetData = $budget
+        ? $budget->toArray()
+        : ['t1' => 0, 't2' => 0, 't3' => 0, 't4' => 0, 't5' => 0,'ct1' => 0, 'ct2' => 0, 'ct3' => 0, 'ct4' => 0, 'ct5' => 0];
+
+    // Kembalikan sebagai JSON gabungan
+    return response()->json([
+        'indikator' => $indikatorData,
+        'budget'    => $budgetData,
+    ]);
+}
 }

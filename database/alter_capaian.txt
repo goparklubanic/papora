@@ -1,0 +1,10 @@
+ALTER TABLE ccd_indicators ADD COLUMN ct1 float DEFAULT 0.00;
+ALTER TABLE ccd_indicators ADD COLUMN ct2 float DEFAULT 0.00;
+ALTER TABLE ccd_indicators ADD COLUMN ct3 float DEFAULT 0.00;
+ALTER TABLE ccd_indicators ADD COLUMN ct4 float DEFAULT 0.00;
+ALTER TABLE ccd_indicators ADD COLUMN ct5 float DEFAULT 0.00;
+ALTER TABLE ccd_budgets ADD COLUMN ct1 numeric default 0;
+ALTER TABLE ccd_budgets ADD COLUMN ct2 numeric default 0;
+ALTER TABLE ccd_budgets ADD COLUMN ct3 numeric default 0;
+ALTER TABLE ccd_budgets ADD COLUMN ct4 numeric default 0;
+ALTER TABLE ccd_budgets ADD COLUMN ct5 numeric default 0;
