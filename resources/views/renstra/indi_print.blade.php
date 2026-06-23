@@ -153,13 +153,38 @@
                         <td class="text-end monospace fsz-6" id="vat5"></td>
                     </tr>
                     <tr class="text-center">
-                        <td class="fw-bold text-start">Capaian</td>
-                        <td class="text-end monospace fsz-6" id="cat1"></td>
-                        <td class="text-end monospace fsz-6" id="cat2"></td>
-                        <td class="text-end monospace fsz-6" id="cat3"></td>
-                        <td class="text-end monospace fsz-6" id="cat4"></td>
-                        <td class="text-end monospace fsz-6" id="cat5"></td>
+                        <td class="fw-bold text-start">Capaian TW-1</td>
+                        <td class="text-end monospace fsz-6" id="cat1_tw1"></td>
+                        <td class="text-end monospace fsz-6" id="cat2_tw1"></td>
+                        <td class="text-end monospace fsz-6" id="cat3_tw1"></td>
+                        <td class="text-end monospace fsz-6" id="cat4_tw1"></td>
+                        <td class="text-end monospace fsz-6" id="cat5_tw1"></td>
                     </tr>
+                    <tr class="text-center">
+                        <td class="fw-bold text-start">Capaian TW-2</td>
+                        <td class="text-end monospace fsz-6" id="cat1_tw2"></td>
+                        <td class="text-end monospace fsz-6" id="cat2_tw2"></td>
+                        <td class="text-end monospace fsz-6" id="cat3_tw2"></td>
+                        <td class="text-end monospace fsz-6" id="cat4_tw2"></td>
+                        <td class="text-end monospace fsz-6" id="cat5_tw2"></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="fw-bold text-start">Capaian TW-3</td>
+                        <td class="text-end monospace fsz-6" id="cat1_tw3"></td>
+                        <td class="text-end monospace fsz-6" id="cat2_tw3"></td>
+                        <td class="text-end monospace fsz-6" id="cat3_tw3"></td>
+                        <td class="text-end monospace fsz-6" id="cat4_tw3"></td>
+                        <td class="text-end monospace fsz-6" id="cat5_tw3"></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="fw-bold text-start">Capaian TW-2</td>
+                        <td class="text-end monospace fsz-6" id="cat1_tw4"></td>
+                        <td class="text-end monospace fsz-6" id="cat2_tw4"></td>
+                        <td class="text-end monospace fsz-6" id="cat3_tw4"></td>
+                        <td class="text-end monospace fsz-6" id="cat4_tw4"></td>
+                        <td class="text-end monospace fsz-6" id="cat5_tw4"></td>
+                    </tr>
+
                 </tbody>
             </table>
                 @endif
@@ -260,9 +285,9 @@
             getBudget("{{ $master_ik }}");
         }
 
-        setTimeout(() => {
-            window.print();
-        }, 5000);
+        // setTimeout(() => {
+        //     window.print();
+        // }, 5000);
     })
 
     function getBudget(master_ik){
@@ -275,11 +300,27 @@
             $("#vat3").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.t3));
             $("#vat4").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.t4));
             $("#vat5").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.t5));
-            $("#cat1").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct1));
-            $("#cat2").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct2));
-            $("#cat3").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct3));
-            $("#cat4").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct4));
-            $("#cat5").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct5));
+            $("#cat1_tw1").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct1_tw1));
+            $("#cat2_tw1").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct2_tw1));
+            $("#cat3_tw1").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct3_tw1));
+            $("#cat4_tw1").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct4_tw1));
+            $("#cat5_tw1").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct5_tw1));
+            $("#cat1_tw2").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct1_tw2));
+            $("#cat2_tw2").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct2_tw2));
+            $("#cat3_tw2").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct3_tw2));
+            $("#cat4_tw2").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct4_tw2));
+            $("#cat5_tw2").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct5_tw2));
+            $("#cat1_tw3").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct1_tw3));
+            $("#cat2_tw3").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct2_tw3));
+            $("#cat3_tw3").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct3_tw3));
+            $("#cat4_tw3").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct4_tw3));
+            $("#cat5_tw3").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct5_tw3));
+            $("#cat1_tw4").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct1_tw4));
+            $("#cat2_tw4").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct2_tw4));
+            $("#cat3_tw4").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct3_tw4));
+            $("#cat4_tw4").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct4_tw4));
+            $("#cat5_tw4").text(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(data.ct5_tw4));
+            
         });
     }
 
