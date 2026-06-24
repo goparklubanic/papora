@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V0;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Ccd_desc;
 use App\Models\Ccd_indicator;
 use App\Models\Ccd_budget;
@@ -349,8 +350,7 @@ class DescController extends Controller
     }
 
     // get indikator dan budget
-    public function getIndikatorDanBudget($master_ik)
-{
+    public function getIndikatorDanBudget($master_ik){
     // Ambil data indikator
     $indikator = Ccd_indicator::where('master_ik', $master_ik)->first();
 
@@ -358,17 +358,206 @@ class DescController extends Controller
         ? $indikator->toArray()
         : ['indikator' => '', 'satuan' => '', 'baseline' => '', 't1' => '', 't2' => '', 't3' => '', 't4' => '', 't5' => ''];
 
-    // Ambil data budget
-    $budget = Ccd_budget::where('master_ik', $master_ik)->first();
+        // Ambil data budget
+        $budget = Ccd_budget::where('master_ik', $master_ik)->first();
 
-    $budgetData = $budget
-        ? $budget->toArray()
-        : ['t1' => 0, 't2' => 0, 't3' => 0, 't4' => 0, 't5' => 0, 'cat1_tw1' => 0, 'cat2_tw1' => 0, 'cat3_tw1' => 0, 'cat4_tw1' => 0, 'cat5_tw1' => 0, 'cat1_tw2' => 0, 'cat2_tw2' => 0, 'cat3_tw2' => 0, 'cat4_tw2' => 0, 'cat5_tw2' => 0, 'cat1_tw3' => 0, 'cat2_tw3' => 0, 'cat3_tw3' => 0, 'cat4_tw3' => 0, 'cat5_tw3' => 0, 'cat1_tw4' => 0, 'cat2_tw4' => 0, 'cat3_tw4' => 0, 'cat4_tw4' => 0, 'cat5_tw4' => 0];
+        $budgetData = $budget
+            ? $budget->toArray()
+            : ['t1' => 0, 't2' => 0, 't3' => 0, 't4' => 0, 't5' => 0, 'cat1_tw1' => 0, 'cat2_tw1' => 0, 'cat3_tw1' => 0, 'cat4_tw1' => 0, 'cat5_tw1' => 0, 'cat1_tw2' => 0, 'cat2_tw2' => 0, 'cat3_tw2' => 0, 'cat4_tw2' => 0, 'cat5_tw2' => 0, 'cat1_tw3' => 0, 'cat2_tw3' => 0, 'cat3_tw3' => 0, 'cat4_tw3' => 0, 'cat5_tw3' => 0, 'cat1_tw4' => 0, 'cat2_tw4' => 0, 'cat3_tw4' => 0, 'cat4_tw4' => 0, 'cat5_tw4' => 0];
 
-    // Kembalikan sebagai JSON gabungan
-    return response()->json([
-        'indikator' => $indikatorData,
-        'budget'    => $budgetData,
-    ]);
+        // Kembalikan sebagai JSON gabungan
+        return response()->json([
+            'indikator' => $indikatorData,
+            'budget'    => $budgetData,
+        ]);
+    }
+
+
+    public function allSK(){
+        $tahun = (int) date('Y');
+
+        // 1. Validasi rentang tahun (2026 s.d 2030)
+        if ($tahun < 2026 || $tahun > 2030) {
+            return response()->json(['message' => 'Data tidak ditemukan', 'data' => NULL], 404);
+        }
+
+        // 2. Hitung suffix/angka untuk nama kolom (2026 -> 1, 2027 -> 2, dst)
+        $suffix = $tahun - 2025;
+
+        // 3. Definisikan kolom statis (sama untuk semua tahun)
+        $staticColumns = [
+            "ccd_descs.master_id",
+            "ccd_descs.deskripsi_1",
+            "ccd_descs.deskripsi_2",
+            "ccd_indicators.indikator",
+        ];
+        
+        // 4. Definisikan kolom dinamis (berubah sesuai tahun menggunakan variabel $suffix)
+        $dynamicColumns = [
+            "ccd_budgets.master_ik as ik_id",
+            "ccd_budgets.t{$suffix} as ta",
+            "ccd_budgets.ct{$suffix}_tw1 as ra1",
+            "ccd_budgets.ct{$suffix}_tw2 as ra2",
+            "ccd_budgets.ct{$suffix}_tw3 as ra3",
+            "ccd_budgets.ct{$suffix}_tw4 as ra4",
+            "ccd_indicators.t{$suffix} as tk",
+            "ccd_indicators.ct{$suffix}_tw1 as rk1",
+            "ccd_indicators.ct{$suffix}_tw2 as rk2",
+            "ccd_indicators.ct{$suffix}_tw3 as rk3",
+            "ccd_indicators.ct{$suffix}_tw4 as rk4",
+        ];
+
+        // 5. Gabungkan semua kolom
+        $selectColumns = array_merge($staticColumns, $dynamicColumns);
+
+        // 6. Eksekusi Query (hanya ditulis sekali)
+        $data = Ccd_indicator::select($selectColumns)
+            ->join('ccd_descs', 'ccd_indicators.master_id', '=', 'ccd_descs.master_id')
+            ->join('ccd_budgets', 'ccd_indicators.master_ik', '=', 'ccd_budgets.master_ik')
+            ->where('ccd_descs.sk_id', '!=', '00')
+            ->orderBy('ccd_descs.master_id')
+            ->get();
+
+        return response()->json([
+            "message" => "Data ditemukan",
+            "data" => $data
+        ]);
+    }
+
+    public function allKG($tahun){
+    $tahun = (int) $tahun;
+    
+    // 1. Validasi rentang tahun agar $suffix tidak error
+    if ($tahun < 2026 || $tahun > 2030) {
+        return response()->json(['message' => 'Tahun tidak valid', 'data' => null], 400);
+    }
+
+    $suffix = $tahun - 2025;
+
+    // 2. Query utama dengan Eager Loading (with)
+    $descs = Ccd_desc::select('master_id', 'deskripsi_1', 'deskripsi_2')
+        ->where('sk_id', '00')
+        ->where('kg_id', '!=', '00')
+        ->with(['indicators' => function ($query) use ($suffix) {
+            // 3. Select kolom dinamis untuk tabel ccd_indicators
+            $query->select(
+                "ccd_indicators.master_id", // WAJIB: Eloquent butuh foreign key ini untuk mencocokkan data
+                "ccd_indicators.master_ik", 
+                "ccd_indicators.indikator",
+                // Kolom Indikator
+                "ccd_indicators.t{$suffix} as tk",
+                "ccd_indicators.ct{$suffix}_tw1 as rk1",
+                "ccd_indicators.ct{$suffix}_tw2 as rk2",
+                "ccd_indicators.ct{$suffix}_tw3 as rk3",
+                "ccd_indicators.ct{$suffix}_tw4 as rk4",
+                // kolom budget
+                DB::raw("(SELECT SUM(t{$suffix}) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 11), '%')) as ta"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw1) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 11), '%')) as ra1"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw2) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 11), '%')) as ra2"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw3) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 11), '%')) as ra3"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw4) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 11), '%')) as ra4")
+            );
+            // ->join("ccd_budgets",function($join){
+            //     $join->on('ccd_masger_ik','LIKE',DB::raw("CONCAT(SUBSTR(ccd_indicators.master_ik,1,11),'%')"));
+            // });
+        }])
+        ->get();
+
+        return response()->json([
+            "message" => "Data ditemukan",
+            "data" => $descs
+        ]);
+    }
+
+    public function allPG($tahun){
+    $tahun = (int) $tahun;
+    
+    // 1. Validasi rentang tahun agar $suffix tidak error
+    if ($tahun < 2026 || $tahun > 2030) {
+        return response()->json(['message' => 'Tahun tidak valid', 'data' => null], 400);
+    }
+
+    $suffix = $tahun - 2025;
+
+    // 2. Query utama dengan Eager Loading (with)
+    $descs = Ccd_desc::select('master_id', 'deskripsi_1', 'deskripsi_2')
+        ->where('sk_id', '00')
+        ->where('kg_id', '00')
+        ->where('pg_id','!=','00')
+        ->with(['indicators' => function ($query) use ($suffix) {
+            // 3. Select kolom dinamis untuk tabel ccd_indicators
+            $query->select(
+                "ccd_indicators.master_id", // WAJIB: Eloquent butuh foreign key ini untuk mencocokkan data
+                "ccd_indicators.master_ik", 
+                "ccd_indicators.indikator",
+                // Kolom Indikator
+                "ccd_indicators.t{$suffix} as tk",
+                "ccd_indicators.ct{$suffix}_tw1 as rk1",
+                "ccd_indicators.ct{$suffix}_tw2 as rk2",
+                "ccd_indicators.ct{$suffix}_tw3 as rk3",
+                "ccd_indicators.ct{$suffix}_tw4 as rk4",
+                // Kolom Budget
+                // Gunakan Subquery untuk SUM. Ini menghindari kebutuhan JOIN dan GROUP BY
+                DB::raw("(SELECT SUM(t{$suffix}) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 8), '%')) as ta"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw1) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 8), '%')) as ra1"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw2) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 8), '%')) as ra2"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw3) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 8), '%')) as ra3"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw4) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 8), '%')) as ra4")
+            );
+        }])
+        ->get();
+
+        return response()->json([
+            "message" => "Data ditemukan",
+            "data" => $descs
+        ]);
+    }
+    public function allSS($tahun){
+    $tahun = (int) $tahun;
+    
+    // 1. Validasi rentang tahun agar $suffix tidak error
+    if ($tahun < 2026 || $tahun > 2030) {
+        return response()->json(['message' => 'Tahun tidak valid', 'data' => null], 400);
+    }
+
+    $suffix = $tahun - 2025;
+
+    // 2. Query utama dengan Eager Loading (with)
+    $descs = Ccd_desc::select('master_id', 'deskripsi_1', 'deskripsi_2')
+        ->where('sk_id', '00')
+        ->where('kg_id', '00')
+        ->where('pg_id','00')
+        ->where('ss_id','!=','00')
+        ->with(['indicators' => function ($query) use ($suffix) {
+            // 3. Select kolom dinamis untuk tabel ccd_indicators
+            $query->select(
+                "ccd_indicators.master_id", // WAJIB: Eloquent butuh foreign key ini untuk mencocokkan data
+                "ccd_indicators.master_ik", 
+                "ccd_indicators.indikator",
+                // Kolom Indikator
+                "ccd_indicators.t{$suffix} as tk",
+                "ccd_indicators.ct{$suffix}_tw1 as rk1",
+                "ccd_indicators.ct{$suffix}_tw2 as rk2",
+                "ccd_indicators.ct{$suffix}_tw3 as rk3",
+                "ccd_indicators.ct{$suffix}_tw4 as rk4",
+                // Kolom Budget
+                DB::raw("(SELECT SUM(t{$suffix}) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 5), '%')) as ta"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw1) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 5), '%')) as ra1"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw2) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 5), '%')) as ra2"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw3) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 5), '%')) as ra3"),
+                DB::raw("(SELECT SUM(ct{$suffix}_tw4) FROM ccd_budgets WHERE master_ik LIKE CONCAT(SUBSTR(ccd_indicators.master_ik, 1, 6), '%')) as ra4")
+            );
+        }])
+        ->get();
+
+        return response()->json([
+            "message" => "Data ditemukan",
+            "data" => $descs
+        ]);
+    }
 }
-}
+
+/*
+cek master_ik indikator dan budgets
+SELECT i.master_ik AS indi_ika, COALESCE(b.master_ik, '0') AS bg_ik FROM ccd_indicators i LEFT JOIN ccd_budgets b ON i.master_ik = b.master_ik;
+*/

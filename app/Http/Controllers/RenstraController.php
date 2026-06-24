@@ -44,6 +44,19 @@ class RenstraController extends Controller
         // echo $topic;
         return view('renstra.indi_print',compact('master_ik','topic'));
     }
+
+    public function all_sk($tahun){
+        return view('renstra.allsk',compact('tahun'));
+    }
+    public function all_kg($tahun){
+        return view('renstra.allkg',compact('tahun'));
+    }
+    public function all_pg($tahun){
+        return view('renstra.allpg',compact('tahun'));
+    }
+    public function all_ss($tahun){
+        return view('renstra.allss',compact('tahun'));
+    }
     
     private function eval_ik($master_ik){
         list($tj_id,$ss_id,$pg_id,$kg_id,$sk_id,$ik_id) = explode("-",$master_ik);

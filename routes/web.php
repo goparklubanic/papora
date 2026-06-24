@@ -27,6 +27,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/detail/{master_id}', [RenstraController::class, 'detail'])->name('renstra.detail');
         Route::get('/view/{master_ik}', [RenstraController::class, 'indi_view'])->name('renstra.view');
         Route::get('/print/{master_ik}', [RenstraController::class, 'indi_print'])->name('renstra.print');
+        Route::get('/all-sk/{tahun}',[RenstraController::class,'all_sk'])->name('renstra.allsk');
+        Route::get('/all-kg/{tahun}',[RenstraController::class,'all_kg'])->name('renstra.allkg');
+        Route::get('/all-pg/{tahun}',[RenstraController::class,'all_pg'])->name('renstra.allpg');
+        Route::get('/all-ss/{tahun}',[RenstraController::class,'all_ss'])->name('renstra.allss');
     });
 
     Route::group(['prefix'=>'edit'], function(){
@@ -60,4 +64,9 @@ Route::group(['prefix' => 'api/v0'], function () {
     Route::post('/set/indikator', [DescController::class, 'setindikator'])->name('api_v0_desc.setindikator');
     Route::get('/view/{master_ik}', [DescController::class, 'getallindikator'])->name('api_v0_desc.getallindikator');
     Route::get('/budget/{master_ik}', [DescController::class, 'getbudget'])->name('api_v0_desc.getbudget');
+    // Uji Konfirmasi
+    Route::get('/all-sk/{tahun}',[DescController::class, 'allSK'])->name('api_v0_desc.allsk');
+    Route::get('/all-kg/{tahun}',[DescController::class, 'allKG'])->name('api_v0_desc.allkg');
+    Route::get('/all-pg/{tahun}',[DescController::class, 'allPG'])->name('api_v0_desc.allpg');
+    Route::get('/all-ss/{tahun}',[DescController::class, 'allSS'])->name('api_v0_desc.allss');
 });

@@ -18,17 +18,21 @@
                 </li> --}}
 
                 
-                {{-- <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link nav-white  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Menu-4
+                        Rekap
                     </a>
+                    @php
+                        $tahun = date('Y');
+                    @endphp
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item nav-white" href="#">Menu 4-1</a></li>
-                        <li><a class="dropdown-item nav-white" href="#">Menu 4-2</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item nav-white" href="#">Menu 4-3</a></li>
+                        <li><a target="_blank" class="dropdown-item nav-white" href="{{ route("renstra.allsk",$tahun) }}">Sub Kegiatan {{ $tahun }}</a></li>
+                        <li><a target="_blank" class="dropdown-item nav-white" href="{{ route("renstra.allkg",$tahun) }}">Kegiatan {{ $tahun }}</a></li>
+                        {{-- <li><hr class="dropdown-divider"></li> --}}
+                        <li><a target="_blank" class="dropdown-item nav-white" href="{{ route("renstra.allpg",$tahun) }}">Program {{ $tahun }}</a></li>
+                        <li><a target="_blank" class="dropdown-item nav-white" href="{{ route("renstra.allss",$tahun) }}">Sasaran {{ $tahun }}</a></li>
                     </ul>
-                </li> --}}
+                </li>
             </ul>
             @if (!Auth::check())
             <form class="d-flex" action="{{ url('/login') }}" method="POST">
