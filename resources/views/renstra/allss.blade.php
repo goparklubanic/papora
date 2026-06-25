@@ -21,7 +21,7 @@
 </head>
 <body>
     <div class="container-fluid py-3">
-        <h2 class="mb-3">Rekap Kegiatan Tahun {{ $tahun }}</h2>
+        <h2 class="mb-3">Rekap Sasaran Tahun {{ $tahun }}</h2>
             <table class="table table-stripped table-sm">
                 <thead>
                     <tr>
@@ -89,7 +89,7 @@
                                 <td class='text-end'>${idk.rk3}</td>
                                 <td class='text-end'>${idk.rk4}</td>
                                 <td class='text-end'>${trk}</td>
-                                <td>${cpk}</td>
+                                <td class='text-center'>${cpk}</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
