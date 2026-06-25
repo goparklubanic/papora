@@ -27,15 +27,15 @@
                 @csrf
                 @method('POST')
                 <div class="form-group mb-2">
-                    <label for="master_ik">Master IK</label>
+                    <label class="bg-success p-1 fw-bold w-100 text-light" for="master_ik">Master IK</label>
                     <input type="text" name="master_ik" id="master_ik" class="form-control" value="{{ $master_ik }}" readonly>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="indikator">Indikator</label>
+                    <label class="bg-success p-1 fw-bold w-100 text-light" for="indikator">Indikator</label>
                     <textarea name="indikator" id="indikator" class="form-control" rows="3"></textarea>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="satuan">Satuan</label>
+                    <label class="bg-success p-1 fw-bold w-100 text-light" for="satuan">Satuan</label>
                     <input type="text" name="satuan" id="satuan" class="form-control">
                 </div>
                 
@@ -74,7 +74,7 @@
                     <input type="number" name="cbaseline" id="cbaseline" class="form-control {{ $bg }}" disabled>
                 </div> --}}
                 <div class="table-responsive">
-                    <p>Target dan Realissi Kerja</p>
+                    <p class="bg-success p-1 fw-bold w-100 text-light">Target dan Realissi Kerja</p>
                     <table class="table table-bordered bg-trans">
                         <tbody>
                             <tr>
@@ -88,10 +88,10 @@
                             <tr>
                                 <th>TAHUN</th>
                                 <th>TARGET</th>
-                                <th>TRI WULAN 1</th>
-                                <th>TRI WULAN 2</th>
-                                <th>TRI WULAN 3</th>
-                                <th>TRI WULAN 4</th>
+                                <th>TW 1</th>
+                                <th>TW 2</th>
+                                <th>TW 3</th>
+                                <th>TW 4</th>
                             </tr>
                         </thead>
                         @php $tahun = date('Y'); @endphp
@@ -145,6 +145,7 @@
                                 <td><input type="number" name="ct5_tw3" id="ct5_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
                                 <td><input type="number" name="ct5_tw4" id="ct5_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>                                
                             </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -176,16 +177,16 @@
                 </div> --}}
                 
                 <div class="table-responsive">
-                    <p>Target dan Realissi Kerja</p>
+                    <p class="bg-success p-1 fw-bold w-100 text-light">Target dan Realissi Kerja</p>
                     <table class="table table-bordered bg-trans">
                         <thead>
                             <tr>
                                 <th>TAHUN</th>
                                 <th>TARGET</th>
-                                <th>TRI WULAN 1</th>
-                                <th>TRI WULAN 2</th>
-                                <th>TRI WULAN 3</th>
-                                <th>TRI WULAN 4</th>
+                                <th>TW 1</th>
+                                <th>TW 2</th>
+                                <th>TW 3</th>
+                                <th>TW 4</th>
                             </tr>
 
                             @if($tahun == 2026)
