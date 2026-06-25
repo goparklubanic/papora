@@ -74,6 +74,7 @@
                     <input type="number" name="cbaseline" id="cbaseline" class="form-control {{ $bg }}" disabled>
                 </div> --}}
                 <div class="table-responsive">
+                    <p>Target dan Realissi Kerja</p>
                     <table class="table table-bordered bg-trans">
                         <tbody>
                             <tr>
@@ -85,54 +86,64 @@
                     <table class="table table-bordered bg-trans">
                         <thead>                            
                             <tr>
-                                <th class="tbi-first-col">HASIL</th>
-                                <th>2026</th>
-                                <th>2027</th>
-                                <th>2028</th>
-                                <th>2029</th>
-                                <th>2030</th>
+                                <th>TAHUN</th>
+                                <th>TARGET</th>
+                                <th>TRI WULAN 1</th>
+                                <th>TRI WULAN 2</th>
+                                <th>TRI WULAN 3</th>
+                                <th>TRI WULAN 4</th>
                             </tr>
                         </thead>
+                        @php $tahun = date('Y'); @endphp
                         <tbody>
+                            @if ($tahun==2026)
                             <tr>
-                                <td>Target</td>                                
+                                <td class="fw-bold text-center">2026</td>
                                 <td><input type="number" name="t1" id="t1" class="form-control"></td>
-                                <td><input type="number" name="t2" id="t2" class="form-control"></td>
-                                <td><input type="number" name="t3" id="t3" class="form-control"></td>
-                                <td><input type="number" name="t4" id="t4" class="form-control"></td>
-                                <td><input type="number" name="t5" id="t5" class="form-control"></td>
-                            </tr>
-                            <tr>
-                                <td>TW1</td>
                                 <td><input type="number" name="ct1_tw1" id="ct1_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct2_tw1" id="ct2_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct3_tw1" id="ct3_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct4_tw1" id="ct4_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct5_tw1" id="ct5_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
-                            </tr>
-                            <tr>
-                                <td>TW2</td>
                                 <td><input type="number" name="ct1_tw2" id="ct1_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct2_tw2" id="ct2_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct3_tw2" id="ct3_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct4_tw2" id="ct4_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct5_tw2" id="ct5_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
-                            </tr>
-                            <tr>
-                                <td>TW3</td>
                                 <td><input type="number" name="ct1_tw3" id="ct1_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct2_tw3" id="ct2_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct3_tw3" id="ct3_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct4_tw3" id="ct4_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct5_tw3" id="ct5_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
-                            </tr>
-                            <tr>
-                                <td>TW4</td>
                                 <td><input type="number" name="ct1_tw4" id="ct1_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct2_tw4" id="ct2_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct3_tw4" id="ct3_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct4_tw4" id="ct4_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="ct5_tw4" id="ct5_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>
+                            </tr>
+                            @endif
+                            @if ($tahun == 2027)
+                            <tr>
+                                <td class="fw-bold text-center">2027</td> 
+                                <td><input type="number" name="t2" id="t2" class="form-control"></td>
+                                <td><input type="number" name="ct2_tw1" id="ct2_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct2_tw2" id="ct2_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct2_tw3" id="ct2_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct2_tw4" id="ct2_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>                                
+                            </tr>
+                            @endif
+                            @if ($tahun == 2028)
+                            <tr>
+                                <td class="fw-bold text-center">2028</td> 
+                                <td><input type="number" name="t3" id="t3" class="form-control"></td>
+                                <td><input type="number" name="ct3_tw1" id="ct3_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct3_tw2" id="ct3_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct3_tw3" id="ct3_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct3_tw4" id="ct3_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>                                
+                            </tr>
+                            @endif
+                            @if ($tahun == 2029)
+                            <tr>
+                                <td class="fw-bold text-center">2029</td> 
+                                <td><input type="number" name="t4" id="t4" class="form-control"></td>
+                                <td><input type="number" name="ct4_tw1" id="ct4_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct4_tw2" id="ct4_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct4_tw3" id="ct4_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct4_tw4" id="ct4_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>                                
+                            </tr>
+                            @endif
+                            @if ($tahun == 2030)
+                            <tr>
+                                <td class="fw-bold text-center">2028</td> 
+                                <td><input type="number" name="t5" id="t5" class="form-control"></td>
+                                <td><input type="number" name="ct5_tw1" id="ct5_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct5_tw2" id="ct5_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct5_tw3" id="ct5_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="ct5_tw4" id="ct5_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>                                
                             </tr>
                         </tbody>
                     </table>
@@ -165,68 +176,68 @@
                 </div> --}}
                 
                 <div class="table-responsive">
+                    <p>Target dan Realissi Kerja</p>
                     <table class="table table-bordered bg-trans">
                         <thead>
                             <tr>
-                                <th class="tbi-first-col">Anggaran</th>
-                                <th>2026</th>
-                                <th>2027</th>
-                                <th>2028</th>
-                                <th>2029</th>
-                                <th>2030</th>
+                                <th>TAHUN</th>
+                                <th>TARGET</th>
+                                <th>TRI WULAN 1</th>
+                                <th>TRI WULAN 2</th>
+                                <th>TRI WULAN 3</th>
+                                <th>TRI WULAN 4</th>
                             </tr>
+
+                            @if($tahun == 2026)
                             <tr>
-                                <th class="tbi-first-col">Target</th>
+                                <td class="fw-bold text-center">2026</td>
                                 <th><input type="number" name="vat1" id="vat1" class="form-control {{ $bg }}" {{ $ro }}></th>
-                                <th><input type="number" name="vat2" id="vat2" class="form-control {{ $bg }}" {{ $ro }}></th>
-                                <th><input type="number" name="vat3" id="vat3" class="form-control {{ $bg }}" {{ $ro }}></th>
-                                <th><input type="number" name="vat4" id="vat4" class="form-control {{ $bg }}" {{ $ro }}></th>
-                                <th><input type="number" name="vat5" id="vat5" class="form-control {{ $bg }}" {{ $ro }}></th>
-                            </tr>
-                        </thead>
-                        <thead>
-                            <tr>
-                                <th>Capaian</th>
-                                <th>2026</th>
-                                <th>2027</th>
-                                <th>2028</th>
-                                <th>2029</th>
-                                <th>2030</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>TW1</td>
                                 <td><input type="number" name="cat1_tw1" id="cat1_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat2_tw1" id="cat2_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat3_tw1" id="cat3_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat4_tw1" id="cat4_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat5_tw1" id="cat5_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
-                            </tr>
-                            <tr>
-                                <td>TW2</td>
                                 <td><input type="number" name="cat1_tw2" id="cat1_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat2_tw2" id="cat2_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat3_tw2" id="cat3_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat4_tw2" id="cat4_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat5_tw2" id="cat5_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
-                            </tr>
-                            <tr>
-                                <td>TW3</td>
                                 <td><input type="number" name="cat1_tw3" id="cat1_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat2_tw3" id="cat2_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat3_tw3" id="cat3_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat4_tw3" id="cat4_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
-                                <td><input type="number" name="cat5_tw3" id="cat5_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
-                            </tr>
-                            <tr>
-                                <td>TW4</td>
                                 <td><input type="number" name="cat1_tw4" id="cat1_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>
+                            </tr>
+                            @endif
+                            @if($tahun=="2027")
+                            <tr>
+                                <td class="fw-bold text-center">2027</td>
+                                <th><input type="number" name="vat2" id="vat2" class="form-control {{ $bg }}" {{ $ro }}></th>
+                                <td><input type="number" name="cat2_tw1" id="cat2_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="cat2_tw2" id="cat2_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="cat2_tw3" id="cat2_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
                                 <td><input type="number" name="cat2_tw4" id="cat2_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>
+                            </tr>
+                            @endif
+                            @if($tahun=="2028")
+                            <tr>
+                                <td class="fw-bold text-center">2028</td>
+                                <th><input type="number" name="vat3" id="vat3" class="form-control {{ $bg }}" {{ $ro }}></th>
+                                <td><input type="number" name="cat3_tw1" id="cat3_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="cat3_tw2" id="cat3_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="cat3_tw3" id="cat3_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
                                 <td><input type="number" name="cat3_tw4" id="cat3_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>
+                            </tr>
+                            @endif
+                            @if($tahun=="2029")
+                            <tr>
+                                <td class="fw-bold text-center">2029</td>
+                                <th><input type="number" name="vat4" id="vat4" class="form-control {{ $bg }}" {{ $ro }}></th>
+                                <td><input type="number" name="cat4_tw1" id="cat4_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="cat4_tw2" id="cat4_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="cat4_tw3" id="cat4_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
                                 <td><input type="number" name="cat4_tw4" id="cat4_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>
+                            </tr>
+                            @endif
+                            @if($tahun=="2030")
+                            <tr>
+                                <td class="fw-bold text-center">2030</td>
+                                <th><input type="number" name="vat5" id="vat5" class="form-control {{ $bg }}" {{ $ro }}></th>
+                                <td><input type="number" name="cat5_tw1" id="cat5_tw1" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="cat5_tw2" id="cat5_tw2" class="form-control {{ $bg }}" {{ $ro }}></td>
+                                <td><input type="number" name="cat5_tw3" id="cat5_tw3" class="form-control {{ $bg }}" {{ $ro }}></td>
                                 <td><input type="number" name="cat5_tw4" id="cat5_tw4" class="form-control {{ $bg }}" {{ $ro }}></td>
                             </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -300,31 +311,31 @@ $(function () {
             $("#vat3").val(data.budget.t3);
             $("#vat4").val(data.budget.t4);
             $("#vat5").val(data.budget.t5);
-            $("#cat1_tw1").val(data.budget.cat1_tw1);
-            $("#cat2_tw1").val(data.budget.cat2_tw1);
-            $("#cat3_tw1").val(data.budget.cat3_tw1);
-            $("#cat4_tw1").val(data.budget.cat4_tw1);
-            $("#cat5_tw1").val(data.budget.cat5_tw1);
-            $("#cat1_tw2").val(data.budget.cat1_tw2);
-            $("#cat2_tw2").val(data.budget.cat2_tw2);
-            $("#cat3_tw2").val(data.budget.cat3_tw2);
-            $("#cat4_tw2").val(data.budget.cat4_tw2);
-            $("#cat5_tw2").val(data.budget.cat5_tw2);
-            $("#cat1_tw3").val(data.budget.cat1_tw3);
-            $("#cat2_tw3").val(data.budget.cat2_tw3);
-            $("#cat3_tw3").val(data.budget.cat3_tw3);
-            $("#cat4_tw3").val(data.budget.cat4_tw3);
-            $("#cat5_tw3").val(data.budget.cat5_tw3);
-            $("#cat1_tw4").val(data.budget.cat1_tw4);
-            $("#cat2_tw4").val(data.budget.cat2_tw4);
-            $("#cat3_tw4").val(data.budget.cat3_tw4);
-            $("#cat4_tw4").val(data.budget.cat4_tw4);
-            $("#cat5_tw4").val(data.budget.cat5_tw4);
-            $("#cat1_tw5").val(data.budget.cat1_tw5);
-            $("#cat2_tw5").val(data.budget.cat2_tw5);
-            $("#cat3_tw5").val(data.budget.cat3_tw5);
-            $("#cat4_tw5").val(data.budget.cat4_tw5);
-            $("#cat5_tw5").val(data.budget.cat5_tw5);
+            $("#cat1_tw1").val(data.budget.ct1_tw1);
+            $("#cat2_tw1").val(data.budget.ct2_tw1);
+            $("#cat3_tw1").val(data.budget.ct3_tw1);
+            $("#cat4_tw1").val(data.budget.ct4_tw1);
+            $("#cat5_tw1").val(data.budget.ct5_tw1);
+            $("#cat1_tw2").val(data.budget.ct1_tw2);
+            $("#cat2_tw2").val(data.budget.ct2_tw2);
+            $("#cat3_tw2").val(data.budget.ct3_tw2);
+            $("#cat4_tw2").val(data.budget.ct4_tw2);
+            $("#cat5_tw2").val(data.budget.ct5_tw2);
+            $("#cat1_tw3").val(data.budget.ct1_tw3);
+            $("#cat2_tw3").val(data.budget.ct2_tw3);
+            $("#cat3_tw3").val(data.budget.ct3_tw3);
+            $("#cat4_tw3").val(data.budget.ct4_tw3);
+            $("#cat5_tw3").val(data.budget.ct5_tw3);
+            $("#cat1_tw4").val(data.budget.ct1_tw4);
+            $("#cat2_tw4").val(data.budget.ct2_tw4);
+            $("#cat3_tw4").val(data.budget.ct3_tw4);
+            $("#cat4_tw4").val(data.budget.ct4_tw4);
+            $("#cat5_tw4").val(data.budget.ct5_tw4);
+            $("#cat1_tw5").val(data.budget.ct1_tw5);
+            $("#cat2_tw5").val(data.budget.ct2_tw5);
+            $("#cat3_tw5").val(data.budget.ct3_tw5);
+            $("#cat4_tw5").val(data.budget.ct4_tw5);
+            $("#cat5_tw5").val(data.budget.ct5_tw5);
         });
 });
 </script>
