@@ -57,23 +57,54 @@ $("#form-indi").on("submit", function (e) {
     });
 });
 
+$("#form-analisa").on("submit",function(ev){
+    ev.preventDefault();
+    let data = {};
+    $("#form-analisa :input").each(function(){
+        let name = $(this).attr("name");
+        if(name){
+            data[name]=$(this).val();
+        }
+    });
+
+    patchData(apiurl+"/setanalisa/"+mik,data)
+    .then((response)=>{
+        let message = response.message;
+        if(response.status == "success"){
+            $("#alert-message").text(message);
+            $("#alert-phi").removeClass("d-none").addClass("show");
+        }else{
+            $("#alert-message").text(message);
+            $("#alert-phi").removeClass("alert-success").addClass("alert-danger");
+            $("#alert-phi").removeClass("d-none").addClass("show");
+        }
+    }).catch((error)=>{
+        console.log(error);
+    })
+})
+
 
 // const token = $('meta[name="csrf-token"]').attr('content');
 async function postData(url, data) {
     return $.ajax({
-            url: url,
-            method: "POST",
-            data: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            }
-            // ,
-            // success: function (response) {
-            //     console.log(response);
-            // },
-            // error: function (response) {
-            //     console.log(response);
-            // },
-        });
+        url: url,
+        method: "POST",
+        data: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        }
+    });
+}
+
+async function patchData(url, data) {
+    return $.ajax({
+        url: url,
+        method: "PATCH",
+        data: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        }
+    });
 }

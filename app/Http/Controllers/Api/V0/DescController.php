@@ -512,6 +512,7 @@ class DescController extends Controller
             "data" => $descs
         ]);
     }
+
     public function allSS($tahun){
     $tahun = (int) $tahun;
     
@@ -554,6 +555,39 @@ class DescController extends Controller
             "message" => "Data ditemukan",
             "data" => $descs
         ]);
+    }
+
+    public function getAnalisa($master_ik){
+        $data = Ccd_indicator::select('masalah','solusi','analisa')
+        ->where('master_ik',$master_ik)->first();
+        return response()->json([
+            "message"=>"Data ditemukan",
+            "data"=>$data
+        ]);
+    }
+
+    public function setAnalisa(Request $request){
+        
+        if(
+            Ccd_indicator::where('master_ik',$request->master_ik)
+            ->update([
+                'masalah'=>$request->masalah,
+                'solusi'=>$request->solusi,
+                'analisa'=>$request->analisa
+            ])
+        ){
+            return response()->json([
+                'status'=>'success',
+                'message'=>"Data berhasil disimpan"
+            ]);
+        }else{
+            return response()->json([
+                'status'=>'failded',
+                'message'=>"Data gagal disimpan"
+            ]);
+        }
+        // return response()->json($request->all());
+        
     }
 }
 

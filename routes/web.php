@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix'=>'edit'], function(){
         Route::get('/deskripsi/{master_id}', [RenstraController::class, 'desc_edit'])->name('edit.deskripsi');
         Route::get('/indikator/{master_id}', [RenstraController::class, 'indi_edit'])->name('edit.indikator');
+        Route::get('/analisa/{master_ik}',[RenstraController::class, 'anal_edit'])->name('edit.analisia');
     });
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -69,4 +70,7 @@ Route::group(['prefix' => 'api/v0'], function () {
     Route::get('/all-kg/{tahun}',[DescController::class, 'allKG'])->name('api_v0_desc.allkg');
     Route::get('/all-pg/{tahun}',[DescController::class, 'allPG'])->name('api_v0_desc.allpg');
     Route::get('/all-ss/{tahun}',[DescController::class, 'allSS'])->name('api_v0_desc.allss');
+    // Masalah, Solusi, Analisa
+    Route::get('/getanalisa/{master_ik}',[DescController::class, 'getAnalisa'])->name('api_v0_indi.getanalisa');
+    Route::patch('/setanalisa/{master_ik}',[DescController::class, 'setAnalisa'])->name('api_v0_indi.setanalisa');
 });

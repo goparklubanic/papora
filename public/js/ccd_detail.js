@@ -33,7 +33,7 @@ $(function () {
                         <td class='text-center td-nav'>
                             ${editi}&nbsp;
                             <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
-                            <a href="#" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-check"></i></a>
+                            <a href="${weburl}/edit/analisa/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-check"></i></a>
                         </td>
                     </tr>
                 `);
@@ -67,7 +67,7 @@ $(function () {
                         <td class='text-center td-nav'>
                             ${editi}&nbsp;
                             <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
-                            <a href="#" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-check"></i></a>
+                            <a href="${weburl}/edit/analisa/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-check"></i></a>
                         </td>
                     </tr>
                 `);
@@ -101,7 +101,7 @@ $(function () {
                         <td class='text-center td-nav'>
                             ${editi}&nbsp;
                             <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
-                            <a href="#" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-check"></i></a>
+                            <a href="${weburl}/edit/analisa/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-check"></i></a>
                         </td>
                     </tr>
                 `);
@@ -135,7 +135,7 @@ $(function () {
                         <td class='text-center td-nav'>
                             ${editi}
                             <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
-                            <a href="#" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-check"></i></a>
+                            <a href="${weburl}/edit/analisa/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-check"></i></a>
                         </td>
                     </tr>
                 `);

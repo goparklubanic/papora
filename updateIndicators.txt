@@ -4,4 +4,6 @@ INSERT INTO ccd_indicators (master_ik,master_id,ik_id,indikator,satuan,baseline,
 INSERT INTO ccd_indicators (master_ik,master_id,ik_id,indikator,satuan,baseline,t1,t2,t3,t4,t5,iku_formulasi,iku_tipehitung,iku_do,iku_sumberdata) VALUES ('03-03-02-04-00-01','03-03-02-04-00','01','Pemeliharaan Barang Milik Daerah Penunjang Urusan Pemerintahan Daerah','persen','0',100,100,100,100,100,'-','-','-','-');
 INSERT INTO ccd_indicators (master_ik,master_id,ik_id,indikator,satuan,baseline,t1,t2,t3,t4,t5,iku_formulasi,iku_tipehitung,iku_do,iku_sumberdata) VALUES ('03-03-02-05-00-01','03-03-02-05-00','01','Persentase terpenuhinya dokumen Perencanaan, Penganggaran, dan Evaluasi Kinerja Perangkat Daerah yang berkualitas dan tepat waktu','persen','0',100,100,100,100,100,'-','-','-','-');
 
-
+ALTER TABLE ccd_indicators ADD COLUMN masalah TEXT DEFAULT NULL;
+ALTER TABLE ccd_indicators ADD COLUMN solusi TEXT DEFAULT NULL;
+ALTER TABLE ccd_indicators ADD COLUMN analisa TEXT DEFAULT NULL;

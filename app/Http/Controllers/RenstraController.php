@@ -31,6 +31,10 @@ class RenstraController extends Controller
         return view('renstra.indi_edit',compact('master_ik'));
     }
 
+    public function anal_edit($master_ik){
+        return view('renstra.anal_edit',compact('master_ik'));
+    }
+
     public function indi_view($master_ik)
     {
         $topic = $this->eval_ik($master_ik);
