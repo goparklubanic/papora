@@ -26,6 +26,35 @@ body {
   margin: 0;
 }
 
+#menu-btn {
+  display: none;
+}
+
+#app-row {
+  display: flex;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+#app-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  padding: 20px;
+  transition: transfofm 0.3s ease;
+  background-color: #c6cecb;
+}
+
+.bg-link {
+  border-bottom: 1px solid #965b5b;
+  padding-left: 10px;
+  margin-bottom: 2px;
+}
+
+#app-content {
+  flex: 1;
+  padding: 20px;
+}
+
 textarea {
   resize: none !important;
 }
@@ -196,8 +225,28 @@ table.bg-trans tbody > tr > td {
   background: transparent !important;
 }
 
+#app-spacer {
+  height: 86px;
+}
+
 @media screen and (max-width: 450px) {
+  #app-sidebar {
+    width: 100%;
+    display: none;
+  }
+  #app-content {
+    width: 100%;
+  }
+  .logo-box {
+    width: 100%;
+  }
+  .logo-box img {
+    width: 100%;
+  }
   table.table-renstra tbody tr td {
+    display: block;
+  }
+  #menu-btn {
     display: block;
   }
   table.table-renstra tbody tr td:nth-child(2) {

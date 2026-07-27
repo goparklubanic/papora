@@ -1,3 +1,7 @@
+@php
+    $baseyr = 2025;
+    $currentyr = date('Y');
+@endphp
 @extends('layouts.app')
 @section('content')
 <div class="row">
@@ -20,16 +24,31 @@
                     <tr>
                         <th rowspan="2">Indikator</th>
                         <th rowspan="2">Satuan</th>
-                        <th colspan="6">Target</th>
+                        <th colspan="3">Target</th>
                         <th rowspan="2">Kontrol</th>
                     </tr>
                     <tr>
                         <th>Baseline</th>
-                        <th>Tahun 1</th>
-                        <th>Tahun 2</th>
-                        <th>Tahun 3</th>
-                        <th>Tahun 4</th>
-                        <th>Tahun 5</th>
+                        @php
+                            $i=1;
+                        @endphp
+                        @while ($i<=5)
+                            <th>{{ $baseyr+$i }}</th>
+                            @php
+                                $labelyr = $baseyr+$i;
+                                if( $labelyr > $currentyr && $labelyr < 2030){
+                                    break;
+                                } 
+                                $i++;
+                            @endphp
+                        @endwhile
+                        {{-- 
+                        <th>{{ $baseyr+1 }}</th>
+                        <th>{{ $baseyr+2 }}</th>
+                        <th>{{ $baseyr+3 }}</th>
+                        <th>{{ $baseyr+4 }}</th>
+                        <th>{{ $baseyr+5 }}</th>
+                        --}}
                     </tr>
                 </thead>
                 <tbody id="ss_indikator"></tbody>
@@ -55,16 +74,24 @@
                     <tr>
                         <th rowspan="2">Indikator</th>
                         <th rowspan="2">Satuan</th>
-                        <th colspan="6">Target</th>
+                        <th colspan="3">Target</th>
                         <th rowspan="2">Kontrol</th>
                     </tr>
                     <tr>
                         <th>Baseline</th>
-                        <th>Tahun 1</th>
-                        <th>Tahun 2</th>
-                        <th>Tahun 3</th>
-                        <th>Tahun 4</th>
-                        <th>Tahun 5</th>
+                        @php
+                            $i=1;
+                        @endphp
+                        @while ($i<=5)
+                            <th>{{ $baseyr+$i }}</th>
+                            @php
+                                $labelyr = $baseyr+$i;
+                                if( $labelyr > $currentyr && $labelyr < 2030){
+                                    break;
+                                } 
+                                $i++;
+                            @endphp
+                        @endwhile
                     </tr>
                 </thead>
                 <tbody id="pg_indikator"></tbody>
@@ -86,16 +113,24 @@
                     <tr>
                         <th rowspan="2">Indikator</th>
                         <th rowspan="2">Satuan</th>
-                        <th colspan="6">Target</th>
+                        <th colspan="3">Target</th>
                         <th rowspan="2">Kontrol</th>
                     </tr>
                     <tr>
                         <th>Baseline</th>
-                        <th>Tahun 1</th>
-                        <th>Tahun 2</th>
-                        <th>Tahun 3</th>
-                        <th>Tahun 4</th>
-                        <th>Tahun 5</th>
+                        @php
+                            $i=1;
+                        @endphp
+                        @while ($i<=5)
+                            <th>{{ $baseyr+$i }}</th>
+                            @php
+                                $labelyr = $baseyr+$i;
+                                if( $labelyr > $currentyr && $labelyr < 2030){
+                                    break;
+                                } 
+                                $i++;
+                            @endphp
+                        @endwhile
                     </tr>
                 </thead>
                 <tbody id="kg_indikator"></tbody>
@@ -117,16 +152,24 @@
                     <tr>
                         <th rowspan="2">Indikator</th>
                         <th rowspan="2">Satuan</th>
-                        <th colspan="6">Target</th>
+                        <th colspan="3">Target</th>
                         <th rowspan="2">Kontrol</th>
                     </tr>
                     <tr>
                         <th>Baseline</th>
-                        <th>Tahun 1</th>
-                        <th>Tahun 2</th>
-                        <th>Tahun 3</th>
-                        <th>Tahun 4</th>
-                        <th>Tahun 5</th>
+                        @php
+                            $i=1;
+                        @endphp
+                        @while ($i<=5)
+                            <th>{{ $baseyr+$i }}</th>
+                            @php
+                                $labelyr = $baseyr+$i;
+                                if( $labelyr > $currentyr && $labelyr < 2030){
+                                    break;
+                                } 
+                                $i++;
+                            @endphp
+                        @endwhile
                     </tr>
                 </thead>
                 <tbody id="sk_indikator"></tbody>
@@ -139,6 +182,8 @@
 @section('scriptes')
 <script>
     const detail_id = "{{ $master_id }}";
+    const crrntyear = {{ $currentyr }};
+    const maximyear = 2030;
 </script>
 <script src="{{ asset('js/ccd_detail.js') }}"></script>
 @endsection

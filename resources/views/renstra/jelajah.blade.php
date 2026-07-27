@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-    <div class="col">
-        <h1>Jelajah Renstra</h1>
+    <div class="col text-center my-3">
+        <h3>Jelajah Renstra</h3>
     </div>
 </div>
 {{-- TUJUAN --}}

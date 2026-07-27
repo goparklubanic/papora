@@ -1,3 +1,5 @@
+var cy = crrntyear;
+var ny = crrntyear+1;
 $(function () {
     // console.log("Detail Renstra");
     fetch(apiurl + "/desc/detail/" + detail_id)
@@ -25,11 +27,11 @@ $(function () {
                         <td>${ind.indikator}</td>
                         <td>${ind.satuan}</td>
                         <td class='text-end'>${ind.baseline}</td>
-                        <td class='text-end'>${ind.t1}</td>
-                        <td class='text-end'>${ind.t2}</td>
-                        <td class='text-end'>${ind.t3}</td>
-                        <td class='text-end'>${ind.t4}</td>
-                        <td class='text-end'>${ind.t5}</td>
+                        ${[cy,ny].includes(2026) ? `<td class='text-end'>${ind.t1}</td>`:''}
+                        ${[cy,ny].includes(2027) ? `<td class='text-end'>${ind.t2}</td>`:''}
+                        ${[cy,ny].includes(2028) ? `<td class='text-end'>${ind.t3}</td>`:''}
+                        ${[cy,ny].includes(2029) ? `<td class='text-end'>${ind.t4}</td>`:''}
+                        ${[cy,ny].includes(2030) ? `<td class='text-end'>${ind.t5}</td>`:''}
                         <td class='text-center td-nav'>
                             ${editi}&nbsp;
                             <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
@@ -59,11 +61,11 @@ $(function () {
                         <td>${ind.indikator}</td>
                         <td>${ind.satuan}</td>
                         <td class='text-end'>${ind.baseline}</td>
-                        <td class='text-end'>${ind.t1}</td>
-                        <td class='text-end'>${ind.t2}</td>
-                        <td class='text-end'>${ind.t3}</td>
-                        <td class='text-end'>${ind.t4}</td>
-                        <td class='text-end'>${ind.t5}</td>
+                        ${[cy,ny].includes(2026) ? `<td class='text-end'>${ind.t1}</td>`:''}
+                        ${[cy,ny].includes(2027) ? `<td class='text-end'>${ind.t2}</td>`:''}
+                        ${[cy,ny].includes(2028) ? `<td class='text-end'>${ind.t3}</td>`:''}
+                        ${[cy,ny].includes(2029) ? `<td class='text-end'>${ind.t4}</td>`:''}
+                        ${[cy,ny].includes(2030) ? `<td class='text-end'>${ind.t5}</td>`:''}
                         <td class='text-center td-nav'>
                             ${editi}&nbsp;
                             <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
@@ -93,11 +95,11 @@ $(function () {
                         <td>${ind.indikator}</td>
                         <td>${ind.satuan}</td>
                         <td class='text-end'>${ind.baseline}</td>
-                        <td class='text-end'>${ind.t1}</td>
-                        <td class='text-end'>${ind.t2}</td>
-                        <td class='text-end'>${ind.t3}</td>
-                        <td class='text-end'>${ind.t4}</td>
-                        <td class='text-end'>${ind.t5}</td>
+                        ${[cy,ny].includes(2026) ? `<td class='text-end'>${ind.t1}</td>`:''}
+                        ${[cy,ny].includes(2027) ? `<td class='text-end'>${ind.t2}</td>`:''}
+                        ${[cy,ny].includes(2028) ? `<td class='text-end'>${ind.t3}</td>`:''}
+                        ${[cy,ny].includes(2029) ? `<td class='text-end'>${ind.t4}</td>`:''}
+                        ${[cy,ny].includes(2030) ? `<td class='text-end'>${ind.t5}</td>`:''}
                         <td class='text-center td-nav'>
                             ${editi}&nbsp;
                             <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
@@ -127,11 +129,11 @@ $(function () {
                         <td>${ind.indikator}</td>
                         <td>${ind.satuan}</td>
                         <td class='text-end'>${ind.baseline}</td>
-                        <td class='text-end'>${ind.t1}</td>
-                        <td class='text-end'>${ind.t2}</td>
-                        <td class='text-end'>${ind.t3}</td>
-                        <td class='text-end'>${ind.t4}</td>
-                        <td class='text-end'>${ind.t5}</td>
+                        ${[cy,ny].includes(2026) ? `<td class='text-end'>${ind.t1}</td>`:''}
+                        ${[cy,ny].includes(2027) ? `<td class='text-end'>${ind.t2}</td>`:''}
+                        ${[cy,ny].includes(2028) ? `<td class='text-end'>${ind.t3}</td>`:''}
+                        ${[cy,ny].includes(2029) ? `<td class='text-end'>${ind.t4}</td>`:''}
+                        ${[cy,ny].includes(2030) ? `<td class='text-end'>${ind.t5}</td>`:''}
                         <td class='text-center td-nav'>
                             ${editi}
                             <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
