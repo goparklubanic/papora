@@ -229,6 +229,12 @@ table.bg-trans tbody > tr > td {
   height: 86px;
 }
 
+td.cet {
+  background-color: #e0e0e0 !important;
+  border: 1px dashed gray !important;
+  margin: 2px 4px !important;
+}
+
 @media screen and (max-width: 450px) {
   #app-sidebar {
     width: 100%;
@@ -255,4 +261,23 @@ table.bg-trans tbody > tr > td {
     padding-bottom: 10px;
     text-align: center;
   }
+}
+#hierarchyBody tr td {
+  font-size: small;
+}
+
+td.Sasaran {
+  padding-left: 10px !important;
+}
+
+td.Program {
+  padding-left: 20px !important;
+}
+
+td.Kegiatan {
+  padding-left: 30px !important;
+}
+
+td.Sub-Kegiatan {
+  padding-left: 40px !important;
 }/*# sourceMappingURL=panjaang.css.map */

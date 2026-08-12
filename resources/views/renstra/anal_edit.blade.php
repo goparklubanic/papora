@@ -2,7 +2,8 @@
 @section('content')
 <div class="row">
     <div class="col col-title">
-        <h2>Update Masalah Solusi dan Analisa</h2>
+        {{-- <h2>Update Masalah Solusi dan Analisa</h2> --}}
+        <h2>Pengukuran Kinerja</h2>
         <p class='fw-bold'>{{ $master_ik }}</p>
     </div>
 </div>
@@ -11,7 +12,15 @@
         <p id="alert-message"></p>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    
+    @if ($master_ik == '00-00-00-00-00-00')
+        <div class="row mt-5">
+            <h5>Pilih Indikator</h5>
+            <div class="form-group">
+                <input type="text" name="" id="find-indikator" class="form-control" placeholder="Tuliskan beberapa kata awal indikator, lalu tekan enter">
+            </div>
+        </div>
+    @else
+
     <div class="row mt-5">
         <div class="col-sm-6 mx-auto">
             <form action="#" method="post" id="form-analisa">
@@ -40,6 +49,8 @@
             </form>
         </div>
     </div>
+    
+    @endif
 @endsection
 
 @section('scriptes')

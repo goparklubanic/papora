@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RenstraController;
+use App\Http\Controllers\RencaksiController;
 use App\Http\Controllers\Api\V0\DescController;
+use App\Http\Controllers\Api\V0\RensiController;
 use App\Http\Controllers\Auth\LoginController;
 
 // Login routes
@@ -36,7 +38,12 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix'=>'edit'], function(){
         Route::get('/deskripsi/{master_id}', [RenstraController::class, 'desc_edit'])->name('edit.deskripsi');
         Route::get('/indikator/{master_id}', [RenstraController::class, 'indi_edit'])->name('edit.indikator');
-        Route::get('/analisa/{master_ik}',[RenstraController::class, 'anal_edit'])->name('edit.analisia');
+        Route::get('/analisa/{master_ik}',[RenstraController::class, 'anal_edit'])->name('edit.analisa');
+    });
+
+    Route::group(['prefix'=>'rensi'], function(){
+        Route::get('/',[RencaksiController::class, 'index'])->name('rensi.index');
+        Route::get('/ukur-kinerja',[RencaksiController::class, 'ukin'])->name('rensi.ukin');
     });
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -73,4 +80,7 @@ Route::group(['prefix' => 'api/v0'], function () {
     // Masalah, Solusi, Analisa
     Route::get('/getanalisa/{master_ik}',[DescController::class, 'getAnalisa'])->name('api_v0_indi.getanalisa');
     Route::patch('/setanalisa/{master_ik}',[DescController::class, 'setAnalisa'])->name('api_v0_indi.setanalisa');
+    
+    // Rencana Aksi (rensi)
+    Route::get('/rensi',[RensiController::class, 'rensi'])->name('api_v0_rensi.hierarchy');
 });

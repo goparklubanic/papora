@@ -1,3 +1,7 @@
+@php
+    $cy = date('Y');
+    $ny = $cy+1;
+@endphp
 @extends('layouts.app')
 @section('content')
     <div class="row">
@@ -43,53 +47,63 @@
                 <thead>
                     <tr class="text-center">
                         <th class="text-start fw-bold tbr-first-col">Tahun</th>
-                        <th id="t1"></th>
-                        <th id="t2"></th>
-                        <th id="t3"></th>
-                        <th id="t4"></th>
-                        <th id="t5"></th>
+                        @if ($cy == 2026)
+                            <th id="t1"></th>                            
+                        @endif
+                        @if ($cy == 2026 && $ny==2027)
+                            <th id="t2"></th>                            
+                        @endif
+                        @if ($cy == 2027 && $ny==2028)
+                            <th id="t3"></th>                            
+                        @endif
+                        @if ($cy == 2028 && $ny==2029)
+                            <th id="t4"></th>                            
+                        @endif
+                        @if ($cy == 2029 || $cy==2030)
+                            <th id="t5"></th>                            
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="text-center">
                         <td class="fw-bold text-start">Rencana</td>
-                        <td id="vt1"></td>
-                        <td id="vt2"></td>
-                        <td id="vt3"></td>
-                        <td id="vt4"></td>
-                        <td id="vt5"></td>
+                        @if($cy==2026) <td id="vt1"></td> @endif
+                        @if($cy==2026 && $ny==2027) <td id="vt2"></td> @endif
+                        @if($cy==2027 && $ny==2028) <td id="vt3"></td> @endif
+                        @if($cy==2028 && $ny==2029) <td id="vt4"></td> @endif
+                        @if($cy==2029 || $ny==2030) <td id="vt5"></td> @endif
                     </tr>
                     <tr class="text-center">
                         <td class="fw-bold text-start">Capaian TW1</td>
-                        <td id="cvt1_tw1"></td>
-                        <td id="cvt2_tw1"></td>
-                        <td id="cvt3_tw1"></td>
-                        <td id="cvt4_tw1"></td>
-                        <td id="cvt5_tw1"></td>
+                        @if($cy==2026) <td id="cvt1_tw1"></td> @endif
+                        @if($cy==2026 && $ny==2027) <td id="cvt2_tw1"></td> @endif
+                        @if($cy==2027 && $ny==2028) <td id="cvt3_tw1"></td> @endif
+                        @if($cy==2028 && $ny==2029) <td id="cvt4_tw1"></td> @endif
+                        @if($cy==2029 || $ny==2030) <td id="cvt5_tw1"></td> @endif
                     </tr>
                     <tr class="text-center">
                         <td class="fw-bold text-start">Capaian TW2</td>
-                        <td id="cvt1_tw2"></td>
-                        <td id="cvt2_tw2"></td>
-                        <td id="cvt3_tw2"></td>
-                        <td id="cvt4_tw2"></td>
-                        <td id="cvt5_tw2"></td>
+                        @if($cy==2026) <td id="cvt1_tw2"></td> @endif
+                        @if($cy==2026 && $ny==2027) <td id="cvt2_tw2"></td> @endif
+                        @if($cy==2027 && $ny==2028) <td id="cvt3_tw2"></td> @endif
+                        @if($cy==2028 && $ny==2029) <td id="cvt4_tw2"></td> @endif
+                        @if($cy==2029 || $ny==2030) <td id="cvt5_tw2"></td> @endif
                     </tr>
                     <tr class="text-center">
                         <td class="fw-bold text-start">Capaian TW3</td>
-                        <td id="cvt1_tw3"></td>
-                        <td id="cvt2_tw3"></td>
-                        <td id="cvt3_tw3"></td>
-                        <td id="cvt4_tw3"></td>
-                        <td id="cvt5_tw3"></td>
+                        @if($cy==2026) <td id="cvt1_tw3"></td> @endif
+                        @if($cy==2026 && $ny==2027) <td id="cvt2_tw3"></td> @endif
+                        @if($cy==2027 && $ny==2028) <td id="cvt3_tw3"></td> @endif
+                        @if($cy==2028 && $ny==2029) <td id="cvt4_tw3"></td> @endif
+                        @if($cy==2029 || $ny==2030) <td id="cvt5_tw3"></td> @endif
                     </tr>
                     <tr class="text-center">
                         <td class="fw-bold text-start">Capaian TW4</td>
-                        <td id="cvt1_tw4"></td>
-                        <td id="cvt2_tw4"></td>
-                        <td id="cvt3_tw4"></td>
-                        <td id="cvt4_tw4"></td>
-                        <td id="cvt5_tw4"></td>
+                        @if($cy==2026) <td id="cvt1_tw4"></td> @endif
+                        @if($cy==2026 && $ny==2027) <td id="cvt2_tw4"></td> @endif
+                        @if($cy==2027 && $ny==2028) <td id="cvt3_tw4"></td> @endif
+                        @if($cy==2028 && $ny==2029) <td id="cvt4_tw4"></td> @endif
+                        @if($cy==2029 || $ny==2030) <td id="cvt5_tw4"></td> @endif
                     </tr>
                 </tbody>
             </table>
@@ -153,8 +167,8 @@
             </table>
             @endif
         </section>
-        <section class="bg-white rounded-3 p-3 mb-2">
-            <p class="title">Indikator Kinerja Umum</p>
+        <section class="bg-white rounded-3 p-3 mb-2 d-none">
+            <p class="title">Indikator Kinerja Utama</p>
             <table class="table table-sm">
                 <tbody>
                     <tr>
@@ -312,7 +326,7 @@
                         <tbody>
                             <tr>
                                 <td class="title" width="200">${key}</td>
-                                <td>${value[0].deskripsi_2}</td>
+                                <td>${value[0].deskripsi_1}</td>
                             </tr>
                             <tr>
                                 <td class="title">Indikator</td>

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->text('iku_tipehitung')->nullable();
             $table->text('iku_do')->nullable();
             $table->text('iku_sumberdata')->nullable();
+	        $table->text('iku_penjab')->nullable();
             $table->float('ct1_tw1', 8, 2)->default('0.00');
             $table->float('ct1_tw2', 8, 2)->default('0.00');
             $table->float('ct1_tw3', 8, 2)->default('0.00');
