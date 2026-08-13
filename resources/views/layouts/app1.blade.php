@@ -15,7 +15,7 @@
     </script>
 </head>
 <body>
-    @include('layouts.navbar')
+    @include('layouts.navbar-min')
     <div class="container-fluid">
         @yield('content')
     </div>

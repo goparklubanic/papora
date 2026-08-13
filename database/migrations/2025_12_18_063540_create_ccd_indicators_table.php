@@ -29,6 +29,28 @@ return new class extends Migration
             $table->text('iku_do')->nullable();
             $table->text('iku_sumberdata')->nullable();
 	        $table->text('iku_penjab')->nullable();
+            // target triwulan
+            $table->float('tt1_tw1', 8, 2)->default('0.00');
+            $table->float('tt1_tw2', 8, 2)->default('0.00');
+            $table->float('tt1_tw3', 8, 2)->default('0.00');
+            $table->float('tt1_tw4', 8, 2)->default('0.00');
+            $table->float('tt2_tw1', 8, 2)->default('0.00');
+            $table->float('tt2_tw2', 8, 2)->default('0.00');
+            $table->float('tt2_tw3', 8, 2)->default('0.00');
+            $table->float('tt2_tw4', 8, 2)->default('0.00');
+            $table->float('tt3_tw1', 8, 2)->default('0.00');
+            $table->float('tt3_tw2', 8, 2)->default('0.00');
+            $table->float('tt3_tw3', 8, 2)->default('0.00');
+            $table->float('tt3_tw4', 8, 2)->default('0.00');
+            $table->float('tt4_tw1', 8, 2)->default('0.00');
+            $table->float('tt4_tw2', 8, 2)->default('0.00');
+            $table->float('tt4_tw3', 8, 2)->default('0.00');
+            $table->float('tt4_tw4', 8, 2)->default('0.00');
+            $table->float('tt5_tw1', 8, 2)->default('0.00');
+            $table->float('tt5_tw2', 8, 2)->default('0.00');
+            $table->float('tt5_tw3', 8, 2)->default('0.00');
+            $table->float('tt5_tw4', 8, 2)->default('0.00');
+            // capaian triwulan
             $table->float('ct1_tw1', 8, 2)->default('0.00');
             $table->float('ct1_tw2', 8, 2)->default('0.00');
             $table->float('ct1_tw3', 8, 2)->default('0.00');

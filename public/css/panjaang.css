@@ -37,7 +37,7 @@ body {
 }
 
 #app-sidebar {
-  width: 250px;
+  width: 200px;
   flex-shrink: 0;
   padding: 20px;
   transition: transfofm 0.3s ease;
@@ -171,6 +171,10 @@ table.table-renstra .desc-nama {
   font-family: "Dosis", sans-serif;
 }
 
+.ff-mono {
+  font-family: monospace;
+}
+
 table.table-indikator thead tr th {
   font-size: 1rem;
   font-weight: bold;
@@ -231,7 +235,7 @@ table.bg-trans tbody > tr > td {
 
 td.cet {
   background-color: #e0e0e0 !important;
-  border: 1px dashed gray !important;
+  border: 0px dashed gray !important;
   margin: 2px 4px !important;
 }
 

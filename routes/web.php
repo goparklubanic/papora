@@ -5,7 +5,9 @@ use App\Http\Controllers\RenstraController;
 use App\Http\Controllers\RencaksiController;
 use App\Http\Controllers\Api\V0\DescController;
 use App\Http\Controllers\Api\V0\RensiController;
+use App\Http\Controllers\Api\V0\IndicatorsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\WalidataController;
 
 // Login routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -43,7 +45,21 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix'=>'rensi'], function(){
         Route::get('/',[RencaksiController::class, 'index'])->name('rensi.index');
-        Route::get('/ukur-kinerja',[RencaksiController::class, 'ukin'])->name('rensi.ukin');
+        // Route::get('/ukur-kinerja/{master_ik}',function($master_ik){
+        //     echo $master_ik;
+        // });
+        Route::get('/ukur-kinerja/{master_ik}',[RencaksiController::class, 'ukin'])->name('rensi.ukin');
+    });
+
+    // Administrator / Wali data area
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+        // Route admin di sini
+        // Route::get('/', function () {
+        //     return view('walidata.dashboard');
+        // });
+        Route::get('/', [WalidataController::class, 'index'])->name('walidata.index');
+        Route::get('/tgkinerja', [WalidataController::class, 'tarkin'])->name('walidata.tarkin');
+        Route::get('/tganggaran', [WalidataController::class, 'tarang'])->name('walidata.tarang');
     });
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -83,4 +99,7 @@ Route::group(['prefix' => 'api/v0'], function () {
     
     // Rencana Aksi (rensi)
     Route::get('/rensi',[RensiController::class, 'rensi'])->name('api_v0_rensi.hierarchy');
+
+    // Ukur Kinerja
+    Route::post('/ukin/get-indi',[IndicatorsController::class, 'getIndi'])->name('api_v0.ukin.getindi');
 });

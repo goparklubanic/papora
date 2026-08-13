@@ -104,4 +104,5 @@ class RensiController extends Controller
             })
             ->values();
     }
+
 }

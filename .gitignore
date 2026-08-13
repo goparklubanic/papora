@@ -19,3 +19,4 @@ yarn-error.log
 /.vscode
 oc_session.txt
 /docs
+/database/*.sql

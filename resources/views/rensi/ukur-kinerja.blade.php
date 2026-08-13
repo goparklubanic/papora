@@ -1,4 +1,4 @@
-@extends('layouts.app1')
+@extends('layouts.app')
 @section('content')
     {{-- 
     <div class="row">
@@ -9,14 +9,28 @@
     </div> 
     --}}
     <div class="row mt-2 ff-dosis">
-        <div class="col-sm-8 mx-auto">
-            {{-- Komponen / Elemen --}}
+        <div class="col-sm-10 mx-auto">
+            @if($master_ik=="00-00-00-00-00-00")
             <section class="bg-white rounded-3 p-3 mb-2">
-                <h2>Pengukuran Kinerja Tahun …</h2>
+                <h4>Tentukan indikator kinerja</h4>
+                <input type="text" class="form-control border border-1 border-secondary" id="paramindi" placeholder="Tulis beberapa kalimat awal indikator, lalu tekan enter">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID Indikator</th>
+                            <th>Indikator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="indidata" class="fsz-6"></tbody>
+                </table>
+            </section>
+            @endif
+            <section class="bg-white rounded-3 p-3 mb-2">
+                <h3>Pengukuran Kinerja Tahun {{ date('Y') }}</h3>
                 <table class="table table-sm mb-0">
                     <tbody>
                         <tr>
-                            <td class="title" style="width:45%">Nama Tujuan, Sasaran, Program, Kegiatan atau Sub Kegiatan</td>
+                            <td class="title" style="width:25%">Nama {{ $topic }}</td>
                             <td id="nama"></td>
                         </tr>
                         <tr>
@@ -68,10 +82,10 @@
                         <tbody>
                             <tr class="text-center">
                                 <td class="fw-bold text-start">Target</td>
-                                <td contenteditable=true class="cet" id="kt_tw1"></td>
-                                <td contenteditable=true class="cet" id="kt_tw2"></td>
-                                <td contenteditable=true class="cet" id="kt_tw3"></td>
-                                <td contenteditable=true class="cet" id="kt_tw4"></td>
+                                <td contenteditable=false id="kt_tw1"></td>
+                                <td contenteditable=false id="kt_tw2"></td>
+                                <td contenteditable=false id="kt_tw3"></td>
+                                <td contenteditable=false id="kt_tw4"></td>
                             </tr>
                             <tr class="text-center">
                                 <td class="fw-bold text-start">Realisasi</td>
@@ -82,10 +96,10 @@
                             </tr>
                             <tr class="text-center">
                                 <td class="fw-bold text-start">Capaian</td>
-                                <td contenteditable=true class="cet" id="kc_tw1"></td>
-                                <td contenteditable=true class="cet" id="kc_tw2"></td>
-                                <td contenteditable=true class="cet" id="kc_tw3"></td>
-                                <td contenteditable=true class="cet" id="kc_tw4"></td>
+                                <td contenteditable=false id="kc_tw1"></td>
+                                <td contenteditable=false id="kc_tw2"></td>
+                                <td contenteditable=false id="kc_tw3"></td>
+                                <td contenteditable=false id="kc_tw4"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -109,10 +123,10 @@
                         <tbody>
                             <tr>
                                 <td class="fw-bold text-start">Target</td>
-                                <td class="text-end cet" contenteditable=true id="at_tw1"></td>
-                                <td class="text-end cet" contenteditable=true id="at_tw2"></td>
-                                <td class="text-end cet" contenteditable=true id="at_tw3"></td>
-                                <td class="text-end cet" contenteditable=true id="at_tw4"></td>
+                                <td class="text-end" contenteditable=false id="at_tw1"></td>
+                                <td class="text-end" contenteditable=false id="at_tw2"></td>
+                                <td class="text-end" contenteditable=false id="at_tw3"></td>
+                                <td class="text-end" contenteditable=false id="at_tw4"></td>
                             </tr>
                             <tr>
                                 <td class="fw-bold text-start">Realisasi</td>
@@ -123,10 +137,10 @@
                             </tr>
                             <tr>
                                 <td class="fw-bold text-start">Capaian</td>
-                                <td class="text-end cet" contenteditable=true id="ac_tw1"></td>
-                                <td class="text-end cet" contenteditable=true id="ac_tw2"></td>
-                                <td class="text-end cet" contenteditable=true id="ac_tw3"></td>
-                                <td class="text-end cet" contenteditable=true id="ac_tw4"></td>
+                                <td class="text-end" contenteditable=false id="ac_tw1"></td>
+                                <td class="text-end" contenteditable=false id="ac_tw2"></td>
+                                <td class="text-end" contenteditable=false id="ac_tw3"></td>
+                                <td class="text-end" contenteditable=false id="ac_tw4"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -159,35 +173,65 @@
 @endsection
 
 @section('scriptes')
+<script>
+    $(function () {
+        let mik = "{{ $master_ik }}";
+        let thn = "{{ date('Y') }}";
+        let idx = thn-2025;
+        // console.log(idx);
+        let tgt='tt'+idx;
+
+        if(mik!='00-00-00-00-00-00'){
+            fetch(apiurl + "/view/"+mik)
+            .then(response => response.json())
+            .then(data => {
+                $("#nama").text(data.des.deskripsi_1);
+                $("#indikator").text(data.ind.indikator);
+                $("#iku_alasan").text(data.ind.iku_alasan);
+                $("#iku_formulasi").text(data.ind.iku_formulasi);
+                $("#iku_tipehitung").text(data.ind.iku_tipehitung);
+                $("#iku_do").text(data.ind.iku_do);
+                $("#iku_sumberdata").text(data.ind.iku_sumberdata);
+
+                // target kerja triwulan
+                $("#kt_tw1").text(data.ind[tgt+'_tw1']);
+                $("#kt_tw2").text(data.ind[tgt+'_tw2']);
+                $("#kt_tw3").text(data.ind[tgt+'_tw3']);
+                $("#kt_tw4").text(data.ind[tgt+'_tw4']);
+
+            })
+        }
+        // query pencarian indikator
+        $("#paramindi").on('keypress', function (ev) {
+            if (ev.which === 13) {
+                ev.preventDefault();
+                const data = { data: $("#paramindi").val() };
+                $.ajax({
+                    url: apiurl + "/ukin/get-indi",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function (res) {
+                        if (res.message === 'data ditemukan') {
+                            let html = "";
+                            res.data.forEach(function (item) {
+                                let urltext = '/rensi/ukur-kinerja/'+item.master_ik;
+                                html += "<tr><td class='ff-mono'><a href="+urltext+">" + item.master_ik + "</a></td><td>" + item.indikator + "</td></tr>";
+                            });
+                            $("#indidata").html(html);
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
 
 {{-- <script>
-    // const topic = "{{ $topic }}";
-    // $(function(){
-    //     fetch(apiurl + "/view/{{ $master_ik }}")
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             $("#nama").text(data.des.deskripsi_2);
-    //             $("#indikator").text(data.ind.indikator);
-    //             $("#iku_alasan").text(data.ind.iku_alasan);
-    //             $("#iku_formulasi").text(data.ind.iku_formulasi);
-    //             $("#iku_tipehitung").text(data.ind.iku_tipehitung);
-    //             $("#iku_do").text(data.ind.iku_do);
-    //             $("#iku_sumberdata").text(data.ind.iku_sumberdata);
-
-    //             // Target, Realisasi dan Pencapaian Tri Wulan Kinerja
-    //             const kt = [data.ind.t1, data.ind.t2, data.ind.t3, data.ind.t4];
-    //             const kr = [data.ind.ct1_tw1, data.ind.ct1_tw2, data.ind.ct1_tw3, data.ind.ct1_tw4];
-    //             for (let i = 1; i <= 4; i++) {
-    //                 $("#kt_tw" + i).text(kt[i - 1]);
-    //                 $("#kr_tw" + i).text(kr[i - 1]);
-    //                 $("#kc_tw" + i).text(realisasiRealisasi(kr[i - 1], kt[i - 1]));
-    //             }
-    //         });
-
-    //     if(topic == 'Sub Kegiatan'){
-    //         getBudget("{{ $master_ik }}");
-    //     }
-    // });
+    
 
     // function getBudget(master_ik){
     //     fetch(apiurl + "/budget/" + master_ik)
