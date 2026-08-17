@@ -61,6 +61,10 @@
                             <td class="title">Sumber Data</td>
                             <td id="iku_sumberdata"></td>
                         </tr>
+                        <tr>
+                            <td class="title">Target Tahunan</td>
+                            <td id="tg_tahunan"></td>
+                        </tr>
                     </tbody>
                 </table>
             </section>
@@ -160,9 +164,9 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td id="analisa" style="height:80px"></td>
-                                <td id="masalah"></td>
-                                <td id="solusi"></td>
+                                <td class="cet" contenteditable="true" id="analisa" style="height:80px"></td>
+                                <td class="cet" contenteditable="true" id="masalah"></td>
+                                <td class="cet" contenteditable="true" id="solusi"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -173,6 +177,7 @@
 @endsection
 
 @section('scriptes')
+<script src="{{ asset('js/glofunc.js') }}"></script>
 <script>
     $(function () {
         let mik = "{{ $master_ik }}";
@@ -192,6 +197,9 @@
                 $("#iku_tipehitung").text(data.ind.iku_tipehitung);
                 $("#iku_do").text(data.ind.iku_do);
                 $("#iku_sumberdata").text(data.ind.iku_sumberdata);
+
+                // Target Tahunan
+                $("#tg_tahunan").text(data.ind['t'+idx]);
 
                 // target kerja triwulan
                 $("#kt_tw1").text(data.ind[tgt+'_tw1']);
@@ -227,34 +235,31 @@
                 });
             }
         });
+
+        // deteksi perubahan kelas .cet
+        $("td.cet").on('keydown',function(e){
+            allowNumbersAndDot(e);
+        })
+
+        $('td.cet').on('keyup',function(){
+            // console.log(this.id)
+            let tw=this.id.split('_')[1];
+            let ob=this.id.substring(0,1);
+            t = $("#"+ob+'t_'+tw).text()
+            r = $(this).text();
+            vt = parseFloat(t);
+            vr = parseFloat(r);
+            if(vt>0){
+                c = (vr/vt)*100+"%";
+            }else{
+                c = 'Target 0';
+            }
+            console.log(c);
+
+            $("#"+ob+"c_"+tw).text(c);
+        })
     });
 </script>
 
-{{-- <script>
-    
-
-    // function getBudget(master_ik){
-    //     fetch(apiurl + "/budget/" + master_ik)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             const rupiah = (v) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(v);
-    //             const at = [data.t1, data.t2, data.t3, data.t4];
-    //             const ar = [data.ct1_tw1, data.ct1_tw2, data.ct1_tw3, data.ct1_tw4];
-    //             for (let i = 1; i <= 4; i++) {
-    //                 $("#at_tw" + i).text(rupiah(at[i - 1]));
-    //                 $("#ar_tw" + i).text(rupiah(ar[i - 1]));
-    //                 $("#ac_tw" + i).text(realisasiRealisasi(ar[i - 1], at[i - 1]));
-    //             }
-    //         });
-    // }
-
-    // function realisasiRealisasi(realisasi, target){
-    //     if (target > 0) {
-    //         return (realisasi / target * 100).toFixed(2) + "%";
-    //     }
-    //     return "-";
-    // }
-    // 
-</script> --}}
 
 @endsection

@@ -8,7 +8,7 @@ class Ccd_indicator extends Model
 {
     // table name ccd_indicators, primary key master_id, autoincrement off
     protected $table = 'ccd_indicators';
-    protected $primaryKey = 'indicator_hash';
+    protected $primaryKey = 'master_ik';
     public $incrementing = false;
     protected $guarded = [];
     protected $keyType = 'string';
@@ -18,5 +18,9 @@ class Ccd_indicator extends Model
     public function deskripsi()
     {
         return $this->belongsTo(Ccd_desc::class, 'master_id');
+    }
+
+    public function budget(){
+        return $this->hasOne(Ccd_budget::class,'master_ik');
     }
 }

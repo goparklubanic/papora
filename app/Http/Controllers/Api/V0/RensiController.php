@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Api\V0;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ccd_indicator;
+use App\Models\Ccd_desc;
+use App\Models\Ccd_budget;
 // use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 class RensiController extends Controller
 {
-    public function rensi(): JsonResponse
+    public function xrensi1(): JsonResponse
     {
         $sql = "SELECT
             master_id,
@@ -103,6 +106,48 @@ class RensiController extends Controller
                 ];
             })
             ->values();
+    }
+
+    public function rensi(){
+        $ty = date('Y');
+        $x = $ty - 2025;
+        $tg = "t".$x .' as tgt';
+        $tb = "t".$x .' as anggaran';
+        $ct1 = "tt".$x."_tw1 as ttw1";
+        $ct2 = "tt".$x."_tw2 as ttw2";
+        $ct3 = "tt".$x."_tw3 as ttw3";
+        $ct4 = "tt".$x."_tw4 as ttw4";
+        
+
+        $data = Ccd_desc::with(['indicators' => function ($query) use ($tg, $tb, $ct1, $ct2, $ct3, $ct4) {
+            $query->select('master_id','ik_id','master_ik', 'indikator', 'satuan','iku_penjab', $tg, $ct1, $ct2, $ct3, $ct4)
+            ->with(['budget'=>function ($qb) use ($tb){
+                $qb->select('master_ik',$tb);
+            }]);
+        }])
+        ->select('master_id', 'deskripsi_1 as deskripsi')
+        ->orderBy('master_id', 'asc')
+        ->get();
+
+        foreach($data as $d){
+            $d->ketegori = $this->descLevel($d->master_id);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data'    => $data,
+        ]);
+    }
+
+    private function descLevel($master_id){
+        list($tj,$ss,$pg,$kg,$sk) = explode("-",$master_id);
+        return match(true) {
+        $sk != "00" => "Sub Kegiatan",
+        $kg != "00" => "Kegiatan",
+        $pg != "00" => "Program",
+        $ss != "00" => "Sasaran",
+        default => "Tujuan",
+    };
     }
 
 }

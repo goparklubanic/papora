@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V0\RensiController;
 use App\Http\Controllers\Api\V0\IndicatorsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\WalidataController;
+use App\Http\Controllers\CcdBudgetController;
 
 // Login routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -102,4 +103,11 @@ Route::group(['prefix' => 'api/v0'], function () {
 
     // Ukur Kinerja
     Route::post('/ukin/get-indi',[IndicatorsController::class, 'getIndi'])->name('api_v0.ukin.getindi');
+    Route::get('/ukin/indidata/{master_ik}',[IndicatorsController::class, 'getindiData'])->name('api_v0.ukin.data');
+    Route::PATCH('/admin/set-indikator',[IndicatorsController::class,'indi_update'])->name('walidata.indi_update');
+});
+
+
+Route::group(['prefix'=>'rahasia'],function(){
+    Route::get('/setbudget',[CcdBudgetController::class,'fillbuddget']);
 });

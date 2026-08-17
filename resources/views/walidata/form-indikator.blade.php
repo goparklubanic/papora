@@ -21,10 +21,23 @@
             5 => 2030,
         ];
     @endphp
+    <section class="bg-white rounded-3 p-3 mb-2" id="paramfinder">
+        <h4>Tentukan indikator kinerja</h4>
+        <input type="text" class="form-control border border-1 border-secondary" id="paramindi" placeholder="Tulis beberapa kalimat awal indikator, lalu tekan enter">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>ID Indikator</th>
+                    <th>Indikator</th>
+                </tr>
+            </thead>
+            <tbody id="indidata" class="fsz-6"></tbody>
+        </table>
+    </section>
 
     <div class="card shadow-sm">
         <div class="card-body p-4">
-            <h3 class="mb-4">Form Input Indikator</h3>
+            <h3 class="mb-4">Form Input Ukur Kinerja</h3>
 
             <form id="formIndikator" novalidate>
 
@@ -134,6 +147,7 @@
                         </thead>
                         <tbody>
                             @for ($i = 1; $i <= 5; $i++)
+                                @if($twYears[$i] == date('Y'))
                                 <tr>
                                     {{-- <th class="table-light">Target {{ $i }}</th> --}}
                                     @php
@@ -151,13 +165,14 @@
                                     @endfor
                                     <td class='text-end'>{{ $total ?? '0.00' }}</td>
                                 </tr>
+                                @endif
                             @endfor
                         </tbody>
                     </table>
                 </div>
 
                 {{-- ================= CAPAIAN KINERJA TRIWULANAN ================= --}}
-                <h5 class="section-title">Capaian Kinerja Triwulanan</h5>
+                <h5 class="section-title">Realisasi Kinerja Triwulanan</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered tw-table">
                         <thead class="table-light">
@@ -171,7 +186,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
                             @for ($i = 1; $i <= 5; $i++)
+                                @if($twYears[$i] == date('Y'))
                                 <tr>
                                     <td class="year-col">{{ $twYears[$i] }}</td>
                                     @php
@@ -188,6 +205,7 @@
                                     @endfor
                                     <td class="table-light">{{ $total }}</td>
                                 </tr>
+                                @endif
                             @endfor
                         </tbody>
                     </table>
@@ -217,7 +235,7 @@
 
 @section('scriptes')
     <script>
-        const API_URL = 'http://localhost:8000/api/v0/admin/set-indikator';
+        const API_URL = apiurl + '/admin/set-indikator';
 
         const form = document.getElementById('formIndikator');
         const alertBox = document.getElementById('formAlert');
@@ -269,6 +287,11 @@
             return payload;
         }
 
+        // $("#btnSubmit").on('mouseover', function(){
+        //     const pdata = collectFormData();
+        //     console.log(pdata);
+        // })
+
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
             hideAlert();
@@ -280,7 +303,7 @@
 
             try {
                 const response = await fetch(API_URL, {
-                    method: 'POST',
+                    method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -302,6 +325,74 @@
                 btnSubmit.disabled = false;
                 btnSpinner.classList.add('d-none');
             }
+        });
+    </script>
+
+    <script>
+        // query pencarian indikator
+        $("#paramindi").on('keypress', function (ev) {
+            if (ev.which === 13) {
+                ev.preventDefault();
+                const data = { data: $("#paramindi").val() };
+                $.ajax({
+                    url: apiurl + "/ukin/get-indi",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function (res) {
+                        if (res.message === 'data ditemukan') {
+                            let html = "";
+                            res.data.forEach(function (item) {
+                                html += "<tr><td class='ff-mono'><a href='#' class='link_ik'>" + item.master_ik + "</a></td><td>" + item.indikator + "</td></tr>";
+                            });
+                            $("#indidata").html(html);
+                        }
+                    }
+                });
+            }
+        });
+
+        $("#indidata").on('click','.link_ik',function(){
+            $("#paramfinder").hide();
+            let master_ik = $(this).text();
+            fetch(apiurl+"/ukin/indidata/"+master_ik)
+            .then(response=>response.json())
+            .then(data=>{
+                $("#master_ik").val(data[0].master_ik);
+                $("#master_id").val(data[0].master_id);
+                $("#ik_id").val(data[0].ik_id);
+                $("#indikator").val(data[0].indikator);
+                $("#satuan").val(data[0].satuan);
+                $("#baseline").val(data[0].baseline);
+                $("#t1").val(data[0].t1);
+                $("#t2").val(data[0].t2);
+                $("#t3").val(data[0].t3);
+                $("#t4").val(data[0].t4);
+                $("#t5").val(data[0].t5);
+                $("#iku_alasan").val(data[0].iku_alasan);
+                $("#iku_formulasi").val(data[0].iku_formulasi);
+                $("#iku_sumberdata").val(data[0].iku_sumberdata);
+                $("#iku_penjab").val(data[0].iku_penjab);
+                
+                // target triwulanan
+                for (let t = 1; t <= 5; t++) {
+                    for (let tw = 1; tw <= 4; tw++) {
+                        const key = `tt${t}_tw${tw}`;
+                        $(`#${key}`).val(data[0][key]);
+                    }
+                }
+
+                // realisasi triwulanan
+                for (let t = 1; t <= 5; t++) {
+                    for (let tw = 1; tw <= 4; tw++) {
+                        const key = `ct${t}_tw${tw}`;
+                        $(`#${key}`).val(data[0][key]);
+                    }
+                }
+            });
         });
     </script>
 @endsection
