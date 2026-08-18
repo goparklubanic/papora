@@ -607,6 +607,23 @@ class DescController extends Controller
             'data'=>$data
         ]);
     }
+
+    public function skmax($master_id){
+        // $products = DB::table('products')
+        // ->select('category_id', DB::raw('MAX(price) as highest_price'))
+        // ->groupBy('category_id')
+        // ->get();
+        $mid = substr($master_id,0,11)."%";
+        $skmax = DB::table('ccd_descs')
+        ->select(DB::raw('MAX(sk_id) + 1 as sk_id'))
+        ->where('master_id','like',$mid)
+        ->get();
+
+        return response()->json([
+            'status'=>'success',
+            'data'=>$skmax
+        ]);
+    }
     public function newsk(){}
 }
 

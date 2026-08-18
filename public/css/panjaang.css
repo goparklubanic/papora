@@ -243,6 +243,10 @@ td.cet {
   margin: 2px 4px !important;
 }
 
+.hand-cursor {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 450px) {
   #app-sidebar {
     width: 100%;

@@ -247,6 +247,11 @@ td.cet{
 }
 // font-sizes
 
+// mouse-cursor
+.hand-cursor{
+    cursor: pointer;
+}
+
 @media screen and (max-width: 450px) {
     #app-sidebar{
         width: 100%;

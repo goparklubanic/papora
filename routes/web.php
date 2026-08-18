@@ -113,6 +113,7 @@ Route::group(['prefix' => 'api/v0'], function () {
 
     // SK Baru
     Route::get('/desc/list-kegiatan',[DescController::class, 'lstsk'])->name('api_v0.desc.list_sk');
+    Route::get('/desc/skmax/{master_id}',[DescController::class, 'skmax'])->name('api_v0_desc.skmax');
 });
 
 
