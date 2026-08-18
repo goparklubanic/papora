@@ -20,4 +20,8 @@ class WalidataController extends Controller
     {
         return view('walidata.form-anggaran');
     }
+
+    public function skbaru(){
+        return view('walidata.form-sk');
+    }
 }

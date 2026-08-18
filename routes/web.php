@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V0\IndicatorsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\WalidataController;
 use App\Http\Controllers\CcdBudgetController;
+use App\Http\Controllers\CcdDescController;
 
 // Login routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -37,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/all-pg/{tahun}',[RenstraController::class,'all_pg'])->name('renstra.allpg');
         Route::get('/all-ss/{tahun}',[RenstraController::class,'all_ss'])->name('renstra.allss');
     });
+    
 
     Route::group(['prefix'=>'edit'], function(){
         Route::get('/deskripsi/{master_id}', [RenstraController::class, 'desc_edit'])->name('edit.deskripsi');
@@ -50,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
         //     echo $master_ik;
         // });
         Route::get('/ukur-kinerja/{master_ik}',[RencaksiController::class, 'ukin'])->name('rensi.ukin');
+        Route::get('/iku/{master_ik}',[RencaksiController::class, 'iku'])->name('rensi.iku');
     });
 
     // Administrator / Wali data area
@@ -61,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [WalidataController::class, 'index'])->name('walidata.index');
         Route::get('/tgkinerja', [WalidataController::class, 'tarkin'])->name('walidata.tarkin');
         Route::get('/tganggaran', [WalidataController::class, 'tarang'])->name('walidata.tarang');
+        Route::get('/desc/form-sk',[WalidataController::class, 'skbaru'])->name('walidata.form-sk');
     });
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -89,6 +93,7 @@ Route::group(['prefix' => 'api/v0'], function () {
     Route::post('/set/indikator', [DescController::class, 'setindikator'])->name('api_v0_desc.setindikator');
     Route::get('/view/{master_ik}', [DescController::class, 'getallindikator'])->name('api_v0_desc.getallindikator');
     Route::get('/budget/{master_ik}', [DescController::class, 'getbudget'])->name('api_v0_desc.getbudget');
+
     // Uji Konfirmasi
     Route::get('/all-sk/{tahun}',[DescController::class, 'allSK'])->name('api_v0_desc.allsk');
     Route::get('/all-kg/{tahun}',[DescController::class, 'allKG'])->name('api_v0_desc.allkg');
@@ -105,6 +110,9 @@ Route::group(['prefix' => 'api/v0'], function () {
     Route::post('/ukin/get-indi',[IndicatorsController::class, 'getIndi'])->name('api_v0.ukin.getindi');
     Route::get('/ukin/indidata/{master_ik}',[IndicatorsController::class, 'getindiData'])->name('api_v0.ukin.data');
     Route::PATCH('/admin/set-indikator',[IndicatorsController::class,'indi_update'])->name('walidata.indi_update');
+
+    // SK Baru
+    Route::get('/desc/list-kegiatan',[DescController::class, 'lstsk'])->name('api_v0.desc.list_sk');
 });
 
 

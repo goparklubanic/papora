@@ -15,6 +15,10 @@ class RencaksiController extends Controller
         return view('rensi.ukur-kinerja',compact('master_ik','topic'));
     }
 
+    public function iku($master_ik){
+        return view('rensi.iku',compact('master_ik'));
+    }
+
     private function eval_ik($master_ik){
         if($master_ik !=='00-00-00-00-00-00'){
             list($tj_id,$ss_id,$pg_id,$kg_id,$sk_id,$ik_id) = explode("-",$master_ik);

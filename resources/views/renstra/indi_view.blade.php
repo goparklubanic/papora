@@ -4,7 +4,7 @@
 @endphp
 @extends('layouts.app')
 @section('content')
-    <div class="row">
+<div class="row">
     <div class="col col-title">
         <h2>{{ $topic }}</h2>
         <p class='fw-bold'>{{ $master_ik }}</p>
@@ -73,6 +73,7 @@
                         @if($cy==2028 && $ny==2029) <td id="vt4"></td> @endif
                         @if($cy==2029 || $ny==2030) <td id="vt5"></td> @endif
                     </tr>
+{{--                     
                     <tr class="text-center">
                         <td class="fw-bold text-start">Capaian TW1</td>
                         @if($cy==2026) <td id="cvt1_tw1"></td> @endif
@@ -104,7 +105,9 @@
                         @if($cy==2027 && $ny==2028) <td id="cvt3_tw4"></td> @endif
                         @if($cy==2028 && $ny==2029) <td id="cvt4_tw4"></td> @endif
                         @if($cy==2029 || $ny==2030) <td id="cvt5_tw4"></td> @endif
-                    </tr>
+                    </tr> 
+                    --}}
+
                 </tbody>
             </table>
             {{-- if topic == "Sub Kegiatan" --}}
@@ -115,22 +118,30 @@
                 <thead>
                     <tr class="text-center">
                         <th class="text-start fw-bold tbr-first-col">Tahun</th>
-                        <th id="at1"></th>
-                        <th id="at2"></th>
-                        <th id="at3"></th>
-                        <th id="at4"></th>
-                        <th id="at5"></th>
+                        @if($cy==2026)<th id="at1"></th>@endif
+                        @if($cy==2026 && $ny==2027)<th id="at2"></th>@endif
+                        @if($cy==2027 && $ny==2028)<th id="at3"></th>@endif
+                        @if($cy==2028 && $ny==2028) <th id="at4"></th>@endif
+                        @if($cy==2029 || $ny==2030)<th id="at5"></th>@endif
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="text-center">
                         <td class="fw-bold text-start">Rencana</td>
+                        @if($cy==2026) <td class="text-end monospace fsz-6" id="vat1"></td> @endif
+                        @if($cy==2026 && $ny==2027) <td class="text-end monospace fsz-6" id="vat2"></td> @endif
+                        @if($cy==2027 && $ny==2028) <td class="text-end monospace fsz-6" id="vat3"></td> @endif
+                        @if($cy==2028 && $ny==2029) <td class="text-end monospace fsz-6" id="vat4"></td> @endif
+                        @if($cy==2029 || $ny==2030) <td class="text-end monospace fsz-6" id="vat5"></td> @endif
+                        {{-- 
                         <td class="text-end monospace fsz-6" id="vat1"></td>
                         <td class="text-end monospace fsz-6" id="vat2"></td>
                         <td class="text-end monospace fsz-6" id="vat3"></td>
                         <td class="text-end monospace fsz-6" id="vat4"></td>
-                        <td class="text-end monospace fsz-6" id="vat5"></td>
+                        <td class="text-end monospace fsz-6" id="vat5"></td> 
+                        --}}
                     </tr>
+                    {{-- 
                     <tr class="text-center">
                         <td class="fw-bold text-start">Capaian TW1</td>
                         <td class="text-end monospace fsz-6" id="cat1_tw1"></td>
@@ -163,6 +174,7 @@
                         <td class="text-end monospace fsz-6" id="cat4_tw4"></td>
                         <td class="text-end monospace fsz-6" id="cat5_tw4"></td>
                     </tr>
+                     --}}
                 </tbody>
             </table>
             @endif

@@ -589,8 +589,25 @@ class DescController extends Controller
         // return response()->json($request->all());
         
     }
+    
+    // New Sub Kegiatan
+    // Daftar kegiatan
+    public function lstsk(){
 
+        $data = Ccd_desc::where('tj_id','!=','00')
+        ->where('ss_id','!=','00')
+        ->where('pg_id','!=','00')
+        ->where('kg_id','!=','00')
+        ->where('sk_id','=','00')
+        ->orderBy('master_id')
+        ->get(['master_id','deskripsi_1']);
 
+        return response()->json([
+            'status'=>'success',
+            'data'=>$data
+        ]);
+    }
+    public function newsk(){}
 }
 
 /*

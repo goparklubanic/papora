@@ -10,5 +10,8 @@
     <li class="nav-item bg-link">
       <a class="nav-link my-1 p-0" href="{{ route('walidata.tarang') }}">Target Keuangan</a>
     </li>
+    <li class="nav-item bg-link">
+      <a href="{{ route('walidata.form-sk') }}" class="nav-link my-1 p-0">Sub Kegiatan Baru</a>
+    </li>
   @endif
 </ul>
