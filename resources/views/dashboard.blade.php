@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col mt-3">
         <div class="logo-box">
-            <img src="{{ asset('imgs/SimonevLogo-option2.png') }}" alt="Panjaang">
+            <img src="{{ asset('imgs/SimonevLogo-option2.png') }}" alt="Simonev">
         </div>
         <div class="logo-caption text-center">
             <h3>Pantauan Kinerja dan Anggaran</h3>

@@ -237,7 +237,7 @@
         $("#skform").on('submit',function(ev){
             ev.preventDefault();
             const descids=["master_id","tj_id","ss_id","pg_id","kg_id","sk_id","deskripsi_1"];
-            const indiids=['master_id','indikator','satuan','baseline','kt1','kt2','kt3','kt4','kt5','iku_alasan','iku_tipehitung','iku_formulasi','iku_do','iku_penjab','iku_sumberdata'];
+            const indiids=['master_id','ik_id','indikator','satuan','baseline','kt1','kt2','kt3','kt4','kt5','iku_alasan','iku_tipehitung','iku_formulasi','iku_do','iku_penjab','iku_sumberdata'];
             const budgids=['master_id','at1','at2','at3','at4','at5'];
 
             // collect descdata
@@ -259,6 +259,7 @@
                 }else if(item == 'kt5'){
                     indidata['t5']=$("#"+item).val();
                 }else if(item == 'master_id'){
+                    indidata[item]=$("#master_id").val();
                     indidata['master_ik']=$("#master_id").val()+"-01";
                 }else{
                     indidata[item]=$("#"+item).val();
@@ -286,7 +287,19 @@
 
             // console.log(descdata);
             let data = {"deskripsi":descdata,"indikator":indidata,"budget":budgdata};
-            console.log(data);
+            // console.log(data);
+            $.ajax({
+                url: apiurl + "/desc/skbaru",
+                method: "POST",
+                data: JSON.stringify(data),
+                headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                success:function(res){
+                    console.log(res.status);
+                }
+            })
         })
 
     </script>

@@ -624,7 +624,64 @@ class DescController extends Controller
             'data'=>$skmax
         ]);
     }
-    public function newsk(){}
+
+    public function skbaru(Request $req){
+        $deskripsi = $req->deskripsi;
+        $indikator = $req->indikator;
+        $budgeting = $req->budget;
+
+        $data_deskripsi = [
+            "master_id"=>$deskripsi->master_id,
+            "tj_id"=>$deskripsi->tj_id,
+            "ss_id"=>$deskripsi->ss_id,
+            "pg_id"=>$deskripsi->pg_id,
+            "kg_id"=>$deskripsi->kg_id,
+            "sk_id"=>$deskripsi->sk_id,
+            "deskripsi_1"=>$deskripsi->deskripsi_1
+        ];
+
+        $data_indikator = [
+            "master_ik"=>$indikator->master_ik,
+            "master_id"=>$indikator->master_id,
+            "ik_id"=>'01',
+            "indikator"=>$indikator->indikator,
+            "baseline"=>$indikator->baseline,
+            "satuan"=>$indikator->satuan,
+            "t1"=>$indikator->t1,
+            "t2"=>$indikator->t2,
+            "t3"=>$indikator->t3,
+            "t4"=>$indikator->t4,
+            "t5"=>$indikator->t5,
+            "iku_alasan"=>$indikator->iku_alasan,
+            "iku_tipehitung"=>$indikator->tipehitung,
+            "iku_formulasi"=>$indikator->formulasi,
+            "iku_do"=>$indikator->do,
+            "iku_penjab"=>$indikator->iku_penjab,
+            "iku_sumberdata"=>$indikator->sumberdata
+        ];
+
+        $data_budgeting = [
+            "budget_has"=> (string) \Illuminate\Support\Str::uuid(),
+            "master_ik"=>$budgeting->master_ik,
+            "t1"=>$budgeting->t1,
+            "t2"=>$budgeting->t2,
+            "t3"=>$budgeting->t3,
+            "t4"=>$budgeting->t4,
+            "t5"=>$budgeting->t5,
+        ];
+
+        $response = [
+            'status'=>'success',
+            'data'=>[
+                'desk'=>$data_deskripsi,
+                'indi'=>$data_indikator,
+                'bdgt'=>$data_budgeting
+            ]
+        ];
+
+        return response()->json($response);
+
+    }
 }
 
 /*
