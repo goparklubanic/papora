@@ -58,6 +58,15 @@
         </section>
     </div>
 </div>
+{{-- Filter auth --}}
+@if(Auth::check())
+<div class="row">
+    <div class="col-sm-8 mx-auto mb-3 text-center">
+        <a href="{{ url('/renstra/jelajah') }}" class="btn btn-primary px-3">Renstra Lengkap</a>
+    </div>
+</div>
+@endif
+
 @endsection
 @section('scriptes')
 @endsection
