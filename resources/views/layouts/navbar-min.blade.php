@@ -37,8 +37,8 @@
             @if (!Auth::check())
             <form class="d-flex" action="{{ url('/login') }}" method="POST">
                 @csrf
-                <input class="form-control form-control-sm me-2" type="email" name="email" placeholder="Email" aria-label="Email" required value='walidata@dindik.bna'>
-                <input class="form-control form-control-sm me-2" type="password" name="password" placeholder="Password" aria-label="Password" required value='Wali@123'>
+                <input class="form-control form-control-sm me-2" type="email" name="email" placeholder="Email" aria-label="Email" required>
+                <input class="form-control form-control-sm me-2" type="password" name="password" placeholder="Password" aria-label="Password" required>
                 <button class="btn btn-sm btn-primary btn-outline-white" type="submit">Login</button>
             </form>
             @else
