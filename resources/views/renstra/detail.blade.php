@@ -10,6 +10,45 @@
         <p class='fw-bold'>{{ $master_id }} <a href="javascript:void(0)" id="edit-panel" class="text-warning fw-normal text-decoration-none">Edit</a></p>
     </div>
 </div>
+{{-- Detail Tujuan --}}
+<div class="row">
+    <div class="col">
+        <div class="detail-desc">
+            <p class="fw-bold">Tujuan</p>
+            <p id="tj_desc1"></p>
+            <p id="tj_desc2"></p>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-sm table-indikator">
+                <thead class="text-center">
+                    <tr>
+                        <th rowspan="2">Indikator</th>
+                        <th rowspan="2">Satuan</th>
+                        <th colspan="3">Target</th>
+                        <th rowspan="2">Kontrol</th>
+                    </tr>
+                    <tr>
+                        <th>Baseline</th>
+                        @php
+                            $i=1;
+                        @endphp
+                        @while ($i<=5)
+                            <th>{{ $baseyr+$i }}</th>
+                            @php
+                                $labelyr = $baseyr+$i;
+                                if( $labelyr > $currentyr && $labelyr < 2030){
+                                    break;
+                                } 
+                                $i++;
+                            @endphp
+                        @endwhile
+                    </tr>
+                </thead>
+                <tbody id="tj_indikator"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {{-- Detail Sasaran --}}
 <div class="row">
     <div class="col">
@@ -42,13 +81,6 @@
                                 $i++;
                             @endphp
                         @endwhile
-                        {{-- 
-                        <th>{{ $baseyr+1 }}</th>
-                        <th>{{ $baseyr+2 }}</th>
-                        <th>{{ $baseyr+3 }}</th>
-                        <th>{{ $baseyr+4 }}</th>
-                        <th>{{ $baseyr+5 }}</th>
-                        --}}
                     </tr>
                 </thead>
                 <tbody id="ss_indikator"></tbody>

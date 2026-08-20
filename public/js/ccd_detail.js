@@ -5,9 +5,38 @@ $(function () {
     fetch(apiurl + "/desc/detail/" + detail_id)
         .then((response) => response.json())
         .then((data) => {
+
             // console.log(data.sasaran);
+            // lengkapi deskripsi tujuan
+            let editd = '<a href="'+weburl + '/edit/deskripsi/' + data.tujuan[0].master_id + '" class="text-warning float-end fw-normal text-decoration-none d-none edit-link">edit</a>';
+            $("#tj_desc1").text(data.tujuan[0].deskripsi_1);
+            $("#tj_desc2").text(data.tujuan[0].deskripsi_2);
+            $("#tj_desc2").append(editd);
+
+            // lengkapi indikator tujuan
+            let tj_indikator = data.tujuan[0].indicators;
+            tj_indikator.forEach((ind)=>{
+                let editi = `<a href="{weburl}/edit/indikator/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none d-none edit-link me-2"><i class="bi bi-pencil-square"></i></a>`;
+                $("#tj_indikator").append(`
+                    <tr>
+                        <td>${ind.indikator}</td>
+                        <td>${ind.satuan}</td>
+                        <td class='text-end'>${ind.baseline}</td>
+                        ${[cy,ny].includes(2026) ? `<td class='text-end'>${ind.t1}</td>`:''}
+                        ${[cy,ny].includes(2027) ? `<td class='text-end'>${ind.t2}</td>`:''}
+                        ${[cy,ny].includes(2028) ? `<td class='text-end'>${ind.t3}</td>`:''}
+                        ${[cy,ny].includes(2029) ? `<td class='text-end'>${ind.t4}</td>`:''}
+                        ${[cy,ny].includes(2030) ? `<td class='text-end'>${ind.t5}</td>`:''}
+                        <td class='text-center td-nav'>
+                            ${editi}&nbsp;
+                            <a href="${weburl}/renstra/view/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-bookmark"></i></a>
+                            <a href="${weburl}/edit/analisa/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none edit-link"><i class="bi bi-journal-check"></i></a>
+                        </td>
+                    </tr>`);
+            });
+
             // lengkapi deskripsi sasaran
-            let editd =
+            editd =
                 '<a href="' +
                 weburl +
                 "/edit/deskripsi/" +
@@ -21,7 +50,7 @@ $(function () {
             // lengkapi indikator sasaran
             let ss_indikator = data.sasaran[0].indicators;
             ss_indikator.forEach((ind) => {
-                let editi = `<a href="${weburl}/edit/indikator/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none d-none edit-link me-2"><i class="bi bi-pencil-square"></i></a>`;
+                editi = `<a href="${weburl}/edit/indikator/${ind.master_ik}" class="text-primary float-end fw-normal text-decoration-none d-none edit-link me-2"><i class="bi bi-pencil-square"></i></a>`;
                 $("#ss_indikator").append(`
                     <tr>
                         <td>${ind.indikator}</td>
