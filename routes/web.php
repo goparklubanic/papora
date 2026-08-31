@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\V0\IndicatorsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\WalidataController;
 use App\Http\Controllers\CcdBudgetController;
-use App\Http\Controllers\CcdDescController;
+// use App\Http\Controllers\CcdDescController;
 
 // Login routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -75,46 +75,49 @@ Route::middleware(['auth'])->group(function () {
 
 
 // Route To API/V0
-Route::group(['prefix' => 'api/v0'], function () {
-    Route::get('/desc', [DescController::class, 'index'])->name('api_v0_desc.index');
-    Route::get('/desc/fetch', [DescController::class, 'fetch'])->name('api_v0_desc.fetch');
-    Route::get('/desc/getTujuan', [DescController::class, 'getTujuan'])->name('api_v0_desc.getTujuan');
-    Route::get('/desc/getSasaran/{master_id}', [DescController::class, 'getSasaran'])->name('api_v0_desc.getSasaran');
-    Route::get('/desc/getProgram/{master_id}', [DescController::class, 'getProgram'])->name('api_v0_desc.getProgram');
-    Route::get('/desc/getKegiatan/{master_id}', [DescController::class, 'getKegiatan'])->name('api_v0_desc.getKegiatan');
-    Route::get('/desc/getSubkegiatan/{master_id}', [DescController::class, 'getSubkegiatan'])->name('api_v0_desc.getSubkegiatan');
-    Route::get('/desc/detailcode/{master_id}', [DescController::class, 'detailcode'])->name('api_v0_desc.detailcode');
-    Route::get('/desc/detail/{master_id}', [DescController::class, 'detail'])->name('api_v0_desc.detail');
-    // Update description and indicator
-    Route::get('/get/description/{master_id}', [DescController::class, 'getdescription'])->name('api_v0_desc.getdescription');
-    Route::post('/set/description', [DescController::class, 'setdesctiption'])->name('api_v0_desc.setdesctiption');
-    Route::get('/get/indikator/{master_ik}', [DescController::class, 'getindikator'])->name('api_v0_desc.getindikator');
-    Route::get('/get/indikaget/{master_ika}',[DescController::class, 'getIndikatorDanBudget'])->name('api_v0_desc.getindikaget');
-    Route::post('/set/indikator', [DescController::class, 'setindikator'])->name('api_v0_desc.setindikator');
-    Route::get('/view/{master_ik}', [DescController::class, 'getallindikator'])->name('api_v0_desc.getallindikator');
-    Route::get('/budget/{master_ik}', [DescController::class, 'getbudget'])->name('api_v0_desc.getbudget');
+Route::middleware(['auth'])->group(function () {
 
-    // Uji Konfirmasi
-    Route::get('/all-sk/{tahun}',[DescController::class, 'allSK'])->name('api_v0_desc.allsk');
-    Route::get('/all-kg/{tahun}',[DescController::class, 'allKG'])->name('api_v0_desc.allkg');
-    Route::get('/all-pg/{tahun}',[DescController::class, 'allPG'])->name('api_v0_desc.allpg');
-    Route::get('/all-ss/{tahun}',[DescController::class, 'allSS'])->name('api_v0_desc.allss');
-    // Masalah, Solusi, Analisa
-    Route::get('/getanalisa/{master_ik}',[DescController::class, 'getAnalisa'])->name('api_v0_indi.getanalisa');
-    Route::patch('/setanalisa/{master_ik}',[DescController::class, 'setAnalisa'])->name('api_v0_indi.setanalisa');
+    Route::group(['prefix' => 'api/v0'], function () {
+        Route::get('/desc', [DescController::class, 'index'])->name('api_v0_desc.index');
+        Route::get('/desc/fetch', [DescController::class, 'fetch'])->name('api_v0_desc.fetch');
+        Route::get('/desc/getTujuan', [DescController::class, 'getTujuan'])->name('api_v0_desc.getTujuan');
+        Route::get('/desc/getSasaran/{master_id}', [DescController::class, 'getSasaran'])->name('api_v0_desc.getSasaran');
+        Route::get('/desc/getProgram/{master_id}', [DescController::class, 'getProgram'])->name('api_v0_desc.getProgram');
+        Route::get('/desc/getKegiatan/{master_id}', [DescController::class, 'getKegiatan'])->name('api_v0_desc.getKegiatan');
+        Route::get('/desc/getSubkegiatan/{master_id}', [DescController::class, 'getSubkegiatan'])->name('api_v0_desc.getSubkegiatan');
+        Route::get('/desc/detailcode/{master_id}', [DescController::class, 'detailcode'])->name('api_v0_desc.detailcode');
+        Route::get('/desc/detail/{master_id}', [DescController::class, 'detail'])->name('api_v0_desc.detail');
+        // Update description and indicator
+        Route::get('/get/description/{master_id}', [DescController::class, 'getdescription'])->name('api_v0_desc.getdescription');
+        Route::post('/set/description', [DescController::class, 'setdesctiption'])->name('api_v0_desc.setdesctiption');
+        Route::get('/get/indikator/{master_ik}', [DescController::class, 'getindikator'])->name('api_v0_desc.getindikator');
+        Route::get('/get/indikaget/{master_ika}',[DescController::class, 'getIndikatorDanBudget'])->name('api_v0_desc.getindikaget');
+        Route::post('/set/indikator', [DescController::class, 'setindikator'])->name('api_v0_desc.setindikator');
+        Route::get('/view/{master_ik}', [DescController::class, 'getallindikator'])->name('api_v0_desc.getallindikator');
+        Route::get('/budget/{master_ik}', [DescController::class, 'getbudget'])->name('api_v0_desc.getbudget');
     
-    // Rencana Aksi (rensi)
-    Route::get('/rensi',[RensiController::class, 'rensi'])->name('api_v0_rensi.hierarchy');
-
-    // Ukur Kinerja
-    Route::post('/ukin/get-indi',[IndicatorsController::class, 'getIndi'])->name('api_v0.ukin.getindi');
-    Route::get('/ukin/indidata/{master_ik}',[IndicatorsController::class, 'getindiData'])->name('api_v0.ukin.data');
-    Route::PATCH('/admin/set-indikator',[IndicatorsController::class,'indi_update'])->name('walidata.indi_update');
-
-    // SK Baru
-    Route::get('/desc/list-kegiatan',[DescController::class, 'lstsk'])->name('api_v0.desc.list_sk');
-    Route::get('/desc/skmax/{master_id}',[DescController::class, 'skmax'])->name('api_v0_desc.skmax');
-    Route::post('/desc/skbaru',[DescController::class,'skbaru'])->name('api_v0_desc.skbaru');
+        // Uji Konfirmasi
+        Route::get('/all-sk/{tahun}',[DescController::class, 'allSK'])->name('api_v0_desc.allsk');
+        Route::get('/all-kg/{tahun}',[DescController::class, 'allKG'])->name('api_v0_desc.allkg');
+        Route::get('/all-pg/{tahun}',[DescController::class, 'allPG'])->name('api_v0_desc.allpg');
+        Route::get('/all-ss/{tahun}',[DescController::class, 'allSS'])->name('api_v0_desc.allss');
+        // Masalah, Solusi, Analisa
+        Route::get('/getanalisa/{master_ik}',[DescController::class, 'getAnalisa'])->name('api_v0_indi.getanalisa');
+        Route::patch('/setanalisa/{master_ik}',[DescController::class, 'setAnalisa'])->name('api_v0_indi.setanalisa');
+        
+        // Rencana Aksi (rensi)
+        Route::get('/rensi',[RensiController::class, 'rensi'])->name('api_v0_rensi.hierarchy');
+    
+        // Ukur Kinerja
+        Route::post('/ukin/get-indi',[IndicatorsController::class, 'getIndi'])->name('api_v0.ukin.getindi');
+        Route::get('/ukin/indidata/{master_ik}',[IndicatorsController::class, 'getindiData'])->name('api_v0.ukin.data');
+        Route::PATCH('/admin/set-indikator',[IndicatorsController::class,'indi_update'])->name('walidata.indi_update');
+    
+        // SK Baru
+        Route::get('/desc/list-kegiatan',[DescController::class, 'lstsk'])->name('api_v0.desc.list_sk');
+        Route::get('/desc/skmax/{master_id}',[DescController::class, 'skmax'])->name('api_v0_desc.skmax');
+        Route::post('/desc/skbaru',[DescController::class,'skbaru'])->name('api_v0_desc.skbaru');
+    });
 });
 
 
