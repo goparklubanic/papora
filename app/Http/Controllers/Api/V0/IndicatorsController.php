@@ -100,6 +100,14 @@ class IndicatorsController extends Controller
             'iku_penjab'     => ['sometimes', 'nullable', 'string'],
         ]);
 
-        return $data;
+        $ttrule=[];
+        for($tt=1; $tt<=5; $tt++){
+            for($tw = 1; $tw <=4 ; $tw++){
+                $ttrule["tt{$tt}_tw{$tw}"] =['sometimes','nullable','numeric','between:-999999.99,999999.99'];
+            }
+        }
+
+        $vdata = array_merge($data,$ttrule);
+        return $vdata;
     }
 }

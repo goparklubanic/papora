@@ -9,6 +9,7 @@ use App\Models\Ccd_desc;
 use App\Models\Ccd_indicator;
 use App\Models\Ccd_budget;
 // use PHPUnit\Metadata\After;
+use Illuminate\Support\Facades\Validator;
 
 class DescController extends Controller
 {
@@ -17,22 +18,37 @@ class DescController extends Controller
         return response()->json(['message' => 'Hello World']);
     }
     public function fetch(){
+        
         if(isset($_GET['mi']) && isset($_GET['sec'])){
-            switch($_GET['sec']){
+            $mi = $_GET['mi'];
+            $sec = $_GET['sec'];
+            $validator = Validator::make(
+                [$mi => ['required','string','regex:/^\d{2}(-\d{2}){4}$/']],
+                [$sec => ['required', 'in:tj,ss,pg,kg,sk']]
+            );
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Invalid parameter',
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+
+            switch($sec){
                 case 'tj': 
-                    $resp =  $this->findTujuan($_GET['mi']);
+                    $resp =  $this->findTujuan($mi);
                     break;
                 case 'ss': 
-                    $resp =  $this->findSasaran($_GET['mi']);
+                    $resp =  $this->findSasaran($mi);
                     break;
                 case 'pg': 
-                    $resp =  $this->findProgram($_GET['mi']);
+                    $resp =  $this->findProgram($mi);
                     break;
                 case 'kg': 
-                    $resp =  $this->findKegiatan($_GET['mi']);
+                    $resp =  $this->findKegiatan($mi);
                     break;
                 case 'sk': 
-                    $resp =  $this->findSubkegiatan($_GET['mi']);
+                    $resp =  $this->findSubkegiatan($mi);
                     break;
                 default: $resp=(['message'=>'undefinded']);
                 break;
@@ -251,11 +267,17 @@ class DescController extends Controller
     }
 
     public function setdesctiption(Request $request){
-        $master_id = $request->master_id;
-        $deskripsi_1 = $request->deskripsi_1;
-        $deskripsi_2 = $request->deskripsi_2;
+        $data = $request->validate([
+            'master_id'=>['required','string','regex:/^\d{2}(-\d{2}){4}$/'],
+            'deskripsi_1'=>['required','string','max:300'],
+            'deskripsi_2'=>['sometimes','nullable','string']
+        ]);
+
+        $master_id = $data['master_id'];
+        // $deskripsi_1 = $request->deskripsi_1;
+        // $deskripsi_2 = $request->deskripsi_2;
         $response = Ccd_desc::where('master_id',$master_id)
-            ->update(['deskripsi_1'=>$deskripsi_1, 'deskripsi_2'=>$deskripsi_2]);
+            ->update($data);
         if($response){
             return response()->json(['message'=>'success']);
         }else{
@@ -279,6 +301,12 @@ class DescController extends Controller
 
     public function setindikator(Request $request){
         $master_ik = $request->master_ik;
+        $mik = $request->validate([
+            'master_ik'=>['required','string','regex:/^\d{2}(-\d{2}){5}$/', 'exists:ccd_indicators,master_ik'],
+        ]);
+
+        $vmik = $mik['master_ik'];
+
         $data = $request->except(['_token', '_method']);
 
         $indicatorData = [];
@@ -294,9 +322,12 @@ class DescController extends Controller
             }
         }
 
-        Ccd_indicator::where('master_ik', $master_ik)->update($indicatorData);
+        $vdata = $this->indValidate($indicatorData);
+        $vbudget = $this->indValidateBudget($budgetData);
 
-        $setbudget = $this->setbudget($master_ik, $budgetData);
+        Ccd_indicator::where('master_ik', $vmik)->update($vdata);
+
+        $setbudget = $this->setbudget($vmik, $vbudget);
         if ($setbudget) {
             return response()->json(['message' => 'success']);
         } else {
@@ -680,7 +711,51 @@ class DescController extends Controller
         ];
 
         return response()->json($response);
+    }
 
+    private function indValidate($data){
+        $validator = Validator::make($data, [
+            'master_ik'      => ['required', 'string', 'regex:/^\d{2}(-\d{2}){5}$/'],
+            'ik_id'          => ['sometimes', 'string', 'max:2'],
+            'indikator'      => ['sometimes', 'string'],
+            'satuan'         => ['sometimes', 'string', 'max:255'],
+            'baseline'       => ['sometimes', 'nullable', 'string', 'max:255'],
+            't1'             => ['sometimes', 'nullable', 'numeric', 'between:-999999.99,999999.99'],
+            't2'             => ['sometimes', 'nullable', 'numeric', 'between:-999999.99,999999.99'],
+            't3'             => ['sometimes', 'nullable', 'numeric', 'between:-999999.99,999999.99'],
+            't4'             => ['sometimes', 'nullable', 'numeric', 'between:-999999.99,999999.99'],
+            't5'             => ['sometimes', 'nullable', 'numeric', 'between:-999999.99,999999.99'],
+            'iku_alasan'     => ['sometimes', 'nullable', 'string'],
+            'iku_formulasi'  => ['sometimes', 'nullable', 'string'],
+            'iku_tipehitung' => ['sometimes', 'nullable', 'string'],
+            'iku_do'         => ['sometimes', 'nullable', 'string'],
+            'iku_sumberdata' => ['sometimes', 'nullable', 'string'],
+            'iku_penjab'     => ['sometimes', 'nullable', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            throw new \Illuminate\Validation\ValidationException($validator);
+        }
+
+        return $validator->validated();
+    }
+
+    private function indValidateBudget($data){
+        $rules = [];
+        for ($tt = 1; $tt <= 5; $tt++) {
+            $rules["t{$tt}"] = ['sometimes', 'nullable', 'numeric', 'between:-999999.99,999999.99'];
+            for ($tw = 1; $tw <= 4; $tw++) {
+                $rules["ct{$tt}_tw{$tw}"] = ['sometimes', 'nullable', 'numeric', 'between:-999999.99,999999.99'];
+            }
+        }
+
+        $validator = Validator::make($data, $rules);
+
+        if ($validator->fails()) {
+            throw new \Illuminate\Validation\ValidationException($validator);
+        }
+
+        return $validator->validated();
     }
 }
 
